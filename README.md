@@ -9,8 +9,8 @@ Se crean los scripts SQL para insertar datos de muestra para cada tabla
  (5 entradas por tabla) 
  ```
 ## Herramientas:
-- MySQLLinks to an external site.
-* MySQL WorkbenchLinks to an external site.
+- MySQL
+* MySQL Workbench
 
 
 
