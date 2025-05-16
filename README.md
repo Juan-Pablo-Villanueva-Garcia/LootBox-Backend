@@ -14,4 +14,4 @@ MySQL WorkbenchLinks to an external site.
 
 # Diagrama de la base de datos:
 
-![Diagrama de la base de datos classicmodels](EE-LootBox.png)
+![Diagrama de la base de datos LootBox](EEM-LootBox.png)
