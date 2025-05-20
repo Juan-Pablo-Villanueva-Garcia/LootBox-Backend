@@ -2,7 +2,7 @@ package com.lootbox.ecommercelb.models;
 
 import java.util.Date;
 
-public class Pedidos {
+public class Pedido {
 	private Long idPedido;//clase wrapper
 	private Date pedido;
 	private Long idUsuario;
@@ -10,19 +10,19 @@ public class Pedidos {
 	private String status;//clase wrapper
 	private static Long total = Long.valueOf(0);
 	
-	public Pedidos(Date pedido, Long idUsuario, Double precioTotal, String status) {
+	public Pedido(Date pedido, Long idUsuario, Double precioTotal, String status) {
 		
 		this.pedido = pedido;
 		this.idUsuario = idUsuario;
 		this.precioTotal = precioTotal;
 		this.status = status;
-		Pedidos.total++;
-		this.idPedido = Pedidos.total;	
+		Pedido.total++;
+		this.idPedido = Pedido.total;	
 	} //Constructor con campos
 	
-	public Pedidos () {
-		Pedidos.total++;
-		this.idPedido = Pedidos.total;
+	public Pedido () {
+		Pedido.total++;
+		this.idPedido = Pedido.total;
 	} //Constructor vacío
 	
 	//Getters and Setters
