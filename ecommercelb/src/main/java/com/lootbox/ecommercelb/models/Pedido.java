@@ -1,28 +1,32 @@
 package com.lootbox.ecommercelb.models;
-
+//import java.time.LocalDateTime;
 import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
-public class Pedidos {
+public class Pedido {
+	
 	private Long idPedido;//clase wrapper
-	private Date pedido;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date pedidoAt;
+	//private Date pedido;
 	private Long idUsuario;
 	private Double precioTotal;
 	private String status;//clase wrapper
 	private static Long total = Long.valueOf(0);
 	
-	public Pedidos(Date pedido, Long idUsuario, Double precioTotal, String status) {
-		
-		this.pedido = pedido;
+	
+	public Pedido(Date fecha, Long idUsuario, Double precioTotal, String status) {
+		this.pedidoAt = fecha;
 		this.idUsuario = idUsuario;
 		this.precioTotal = precioTotal;
 		this.status = status;
-		Pedidos.total++;
-		this.idPedido = Pedidos.total;	
+		Pedido.total++;
+		this.idPedido = Pedido.total;	
 	} //Constructor con campos
 	
-	public Pedidos () {
-		Pedidos.total++;
-		this.idPedido = Pedidos.total;
+	public Pedido () {
+		Pedido.total++;
+		this.idPedido = Pedido.total;
 	} //Constructor vacío
 	
 	//Getters and Setters
@@ -30,16 +34,12 @@ public class Pedidos {
 		return idPedido;
 	}//getIdPedido
 
-	public void setIdPedido(Long idPedido) {
-		this.idPedido = idPedido;
-	}//setIdPedido
-
-	public Date getPedido() {
-		return pedido;
+	public Date getPedidoAt() {
+		return pedidoAt;
 	}//getPedido
 
-	public void setPedido(Date pedido) {
-		this.pedido = pedido;
+	public void setPedido(Date fecha) {
+		this.pedidoAt = fecha;
 	}//setPedido
 
 	public Double getPrecioTotal() {
@@ -64,7 +64,7 @@ public class Pedidos {
 
 	@Override
 	public String toString() {
-		return "Pedidos [idPedido=" + idPedido + ", pedido=" + pedido + ", idUsuario=" + idUsuario + ", precioTotal="
+		return "Pedidos [idPedido=" + idPedido + ", pedido=" + pedidoAt + ", idUsuario=" + idUsuario + ", precioTotal="
 				+ precioTotal + ", status=" + status + "]";
 	}//toString
 	
