@@ -1,12 +1,26 @@
 package com.lootbox.ecommercelb.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "productos")
 public class Products {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long idProductos;//clase wrapper
+	
+	@Column(nullable = false)
 	private String name;
 	private String imagen;
 	private String descripcion;
 	private String category;
+	@Column(nullable = false)
 	private Double price;//clase wrapper
 	private String JSON;
 	private Integer sku;
@@ -33,107 +47,66 @@ public class Products {
 
 	//Getters and Setters
 	public Products () {
-		Products.total++;
-		this.idProductos = Products.total;
-		
-	} //Constructor vacío
-
+	} //Constructor vacio
 
 	public String getName() {
 		return name;
 	}//getName
-
-
 	public void setName(String name) {
 		this.name = name;
 	}//setName
-
-
 	public String getImagen() {
 		return imagen;
 	}//getImagen
-
-
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}//setImagen
-
-
 	public String getDescripcion() {
 		return descripcion;
 	}//getDescripcion
-
-
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}//setDescripcion
-
-
 	public String getCategory() {
 		return category;
 	}//getCategory
-
-
 	public void setCategory(String category) {
 		this.category = category;
 	}//setCategory
-
-
 	public Double getPrice() {
 		return price;
 	}//getPrice
-
-
 	public void setPrice(Double price) {
 		this.price = price;
 	}//setPrice
-
-
 	public String getJSON() {
 		return JSON;
 	}//getJSON
-
-
 	public void setJSON(String jSON) {
 		JSON = jSON;
 	}//setJSON
-
-
 	public Integer getSku() {
 		return sku;
 	}//getSku
-
-
 	public void setSku(Integer sku) {
 		this.sku = sku;
 	}//setSku
-
-
 	public Integer getStock() {
 		return stock;
 	}//getStock
-
-
 	public void setStock(Integer stock) {
 		this.stock = stock;
 	}//setStock
-
-
 	public Double getCosto() {
 		return costo;
 	}//getCosto
-
-
 	public void setCosto(Double costo) {
 		this.costo = costo;
 	}//setCosto
-
-
 	public Long getIdProductos() {
 		return idProductos;
 	}//getIdProductos
 	
-	//toString
 	@Override
 	public String toString() {
 		return "Products [idProductos=" + idProductos + ", name=" + name + ", imagen=" + imagen + ", descripcion="
