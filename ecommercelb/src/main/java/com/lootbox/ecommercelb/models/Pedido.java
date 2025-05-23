@@ -1,8 +1,14 @@
 package com.lootbox.ecommercelb.models;
 //import java.time.LocalDateTime;
 import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
+@Entity
+@Table(name="pedidos")
 public class Pedido {
 	
 	private Long idPedido;//clase wrapper
@@ -12,7 +18,7 @@ public class Pedido {
 	private Long idUsuario;
 	private Double precioTotal;
 	private String status;//clase wrapper
-	private static Long total = Long.valueOf(0);
+	//private static Long total = Long.valueOf(0);
 	
 	
 	public Pedido(Date fecha, Long idUsuario, Double precioTotal, String status) {
@@ -20,13 +26,12 @@ public class Pedido {
 		this.idUsuario = idUsuario;
 		this.precioTotal = precioTotal;
 		this.status = status;
-		Pedido.total++;
-		this.idPedido = Pedido.total;	
+		//Pedido.total++;
+		//this.idPedido = Pedido.total;	
 	} //Constructor con campos
 	
 	public Pedido () {
-		Pedido.total++;
-		this.idPedido = Pedido.total;
+	
 	} //Constructor vacío
 	
 	//Getters and Setters

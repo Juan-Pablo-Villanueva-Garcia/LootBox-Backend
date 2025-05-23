@@ -1,7 +1,5 @@
 package com.lootbox.ecommercelb.controllers;
 
-import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +23,8 @@ public class PedidosController {
 	private final PedidosService pedidosService;
 	
 	@Autowired
-	public PedidosController() throws ParseException {
-		pedidosService = new PedidosService();
+	public PedidosController(PedidosService pedidosService) {
+		this.pedidosService  = pedidosService;
 	}//Constructor
 	
 	@GetMapping
@@ -52,11 +50,9 @@ public class PedidosController {
 	@PutMapping(path="{pedidoID}")
 	public Pedido updatePedido(
 			@PathVariable("pedidoID") Long id,  
-			@RequestParam(required = false) Date pedidoAt, 
-			@RequestParam(required = false) Double precioTotal, 
-			@RequestParam(required = false) String status
-			) throws ParseException{
-		return pedidosService.updatePedido(id,pedidoAt,precioTotal,status);
+			@RequestParam(required = true) String status
+			){
+		return pedidosService.updatePedido(id,status);
 	}//updatePedido()
 	
 }//Class PedidosController
