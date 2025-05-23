@@ -29,9 +29,14 @@ public class PedidoshasProductController {
         return service.create(nuevo);
     }
 
+    @PutMapping("/{idPedidoProd}")
+    public PedidoshasProduct update(@PathVariable Long idPedidoProd, @RequestBody PedidoshasProduct updated) {
+        return service.update(idPedidoProd, updated);
+    }
+
     @DeleteMapping("/{idPedidoProd}")
     public String delete(@PathVariable Long idPedidoProd) {
         boolean removed = service.delete(idPedidoProd);
-     return removed ? "eliminado" : "No encontrado";
-     }
+        return removed ? "eliminado" : "No encontrado";
+    }
 }
