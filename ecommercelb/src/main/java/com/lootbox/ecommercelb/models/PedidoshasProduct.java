@@ -1,48 +1,52 @@
 package com.lootbox.ecommercelb.models;
 
+import javax.persistence.*;
 
-
+@Entity
+@Table(name = "pedidos_has_product")
 public class PedidoshasProduct {
-	private Long idPedidoProd;
-	private Long idPedido;//clase wrapper
-	private Long idUProducto;
-	private static Long total = Long.valueOf(0);
-	
-	public PedidoshasProduct(Long idPedidoProd,Long idPedido, Long idUProducto) {
-		this.idPedidoProd = idPedidoProd;
-		this.idPedido = idPedido;
-		this.idUProducto = idUProducto;
-		
-		PedidoshasProduct.total++;
-		this.idPedidoProd = PedidoshasProduct.total;
-	}//constructor con campos
-	
-	//Getters and Setters
-	public PedidoshasProduct() {
-		PedidoshasProduct.total++;
-		this.idPedidoProd = PedidoshasProduct.total;
-	}//constructor vacío 
 
-	public Long getIdPedidoProd() {
-		return idPedidoProd;
-	}//getIdPedidoProd
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idPedidoProd;
 
-	public Long getIdPedido() {
-		return idPedido;
-	}//getIdPedido
+    private Long idPedido;
 
-	public Long getIdUProducto() {
-		return idUProducto;
-	}//getIdPedido
+    private Long idUProducto;
 
-	//toString
-	@Override
-	public String toString() {
-		return "PedidoshasProduct [idPedidoProd=" + idPedidoProd + ", idPedido=" + idPedido + ", idUProducto="
-				+ idUProducto + "]";
-	}//toString
-	
-	
-	
-	
-}//class PedidohasProduct
+    public PedidoshasProduct() {
+    }
+
+    public PedidoshasProduct(Long idPedido, Long idUProducto) {
+        this.idPedido = idPedido;
+        this.idUProducto = idUProducto;
+    }
+
+    // Getters y Setters
+    public Long getIdPedidoProd() {
+        return idPedidoProd;
+    }
+
+    public Long getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(Long idPedido) {
+        this.idPedido = idPedido;
+    }
+
+    public Long getIdUProducto() {
+        return idUProducto;
+    }
+
+    public void setIdUProducto(Long idUProducto) {
+        this.idUProducto = idUProducto;
+    }
+
+    @Override
+    public String toString() {
+        return "PedidoshasProduct [idPedidoProd=" + idPedidoProd + ", idPedido=" + idPedido + ", idUProducto="
+                + idUProducto + "]";
+    }
+}
+

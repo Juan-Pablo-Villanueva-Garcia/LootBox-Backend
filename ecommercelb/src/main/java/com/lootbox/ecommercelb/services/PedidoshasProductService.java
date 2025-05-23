@@ -1,39 +1,53 @@
 package com.lootbox.ecommercelb.services;
 
 import com.lootbox.ecommercelb.models.PedidoshasProduct;
+import com.lootbox.ecommercelb.repositories.PedidoshasProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class PedidoshasProductService {
-    private final List<PedidoshasProduct> lista = new ArrayList<>();
 
-    // Constructor para precargar datos
-    public PedidoshasProductService() {
-        lista.add(new PedidoshasProduct(null,1L, 100L));
-        lista.add(new PedidoshasProduct(null,1L, 101L));
-        lista.add(new PedidoshasProduct(null,2L, 200L));
-    }
+    @Autowired
+    private PedidoshasProductRepository repository;
 
+    // Obtener todos los registros
     public List<PedidoshasProduct> getAll() {
-        return lista;
+        return repository.findAll();
     }
 
+    // Obtener registros con idPedido
     public List<PedidoshasProduct> getByPedidoId(Long idPedido) {
-        return lista.stream()
-                .filter(p -> p.getIdPedido().equals(idPedido))
-                .collect(Collectors.toList());
+        return repository.findByIdPedido(idPedido);
     }
 
+    // Nuevo registro
     public PedidoshasProduct create(PedidoshasProduct nuevo) {
-        lista.add(nuevo);
-        return nuevo;
+        return repository.save(nuevo);
     }
 
-    public boolean delete(Long idPedidoProd) {
-        return lista.removeIf(p -> p.getIdPedidoProd().equals(idPedidoProd));
+    // Actualizar registro existente
+    public PedidoshasProduct update(Long idPedidoProd, PedidoshasProduct updated) {
+        Optional<PedidoshasProduct> optional = repository.findById(idPedidoProd);
+        if (optional.isPresent()) {
+            PedidoshasProduct existente = optional.get();
+            existente.setIdPedido(updated.getIdPedido());
+            existente.setIdUProducto(updated.getIdUProducto());
+            return repository.save(existente);
+        } else {
+            return null; 
         }
+    }
+
+    // Eliminar registro por idPedidoProd
+    public boolean delete(Long idPedidoProd) {
+        if (repository.existsById(idPedidoProd)) {
+            repository.deleteById(idPedidoProd);
+            return true;
+        }
+        return false;
+    }
 }
