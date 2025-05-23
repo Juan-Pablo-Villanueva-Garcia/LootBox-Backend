@@ -6,13 +6,17 @@ public class Usuarios {
 	private String email;
 	private String telefono;
 	private String contraseña;//clase wrapper
+	private String direccion;
+	private Boolean isAdmin;
 	private static Long total = Long.valueOf(0);
-	public Usuarios(String nombre, String email, String telefono, String contraseña) {
+	public Usuarios(String nombre, String email, String telefono, String contraseña, String direccion) {
 		
 		this.nombre = nombre;
 		this.email = email;
 		this.telefono = telefono;
 		this.contraseña = contraseña;
+		this.direccion = direccion;
+		this.isAdmin = false;
 		Usuarios.total++;
 		this.idUsuario = Usuarios.total;
 	}//constructor con campos
@@ -42,6 +46,18 @@ public class Usuarios {
 		return telefono;
 	}//getTelefono
 
+	public String getDireccion() {
+		return direccion;
+	}//getDireccion
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}//setDireccion
+
+	public Boolean getIsAdmin(Boolean isAdmin) {
+		return isAdmin;
+	}//setIsAdmin
+
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}//setTelefono
@@ -61,11 +77,9 @@ public class Usuarios {
 	@Override
 	public String toString() {
 		return "Usuarios [idUsuario=" + idUsuario + ", nombre=" + nombre + ", email=" + email + ", telefono=" + telefono
-				+ ", contraseña=" + contraseña + "]";
+				+ ", contraseña=" + contraseña + ", direccion=" + direccion + ", isAdmin=" + isAdmin + "]";
 	}//toString
-	
-	
-	
+			
 }//class Usuarios
 
 

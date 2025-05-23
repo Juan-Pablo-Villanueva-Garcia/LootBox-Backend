@@ -17,7 +17,7 @@ import com.lootbox.ecommercelb.models.Usuarios;
 import com.lootbox.ecommercelb.services.UsuariosService;
 
 @RestController
-@RequestMapping(path="/api/usuarios")//http://localhost:8080/api/usuarios
+@RequestMapping(path="/api/usuarios/")//http://localhost:8080/api/usuarios
 public class UsuariosController {
 
 	private final UsuariosService usuariosService;
@@ -50,7 +50,8 @@ public class UsuariosController {
 		 @RequestParam(required = false) String nombre,
 		 @RequestParam(required = false) String email,
 		 @RequestParam(required = false) String telefono,
-		 @RequestParam(required = false) String contraseña) {
-		return usuariosService.updateUsuario(id, nombre,email,telefono,contraseña);
+		 @RequestParam(required = false) String contraseña,
+		 @RequestParam(required = false) String direccion){
+		return usuariosService.updateUsuario(id, nombre,email,telefono,contraseña,direccion);
 	}//UpdateUsuario
 }//class UsuariosController
