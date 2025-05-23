@@ -25,7 +25,7 @@ public class Usuarios {
 	@Column(nullable = false)
 	private String direccion;
 	@Column(nullable = false)
-	private Boolean isAdmin;
+	private Boolean isAdmin = false;
 	public Usuarios(String nombre, String email, String telefono, String contraseña, String direccion) {
 		
 		this.nombre = nombre;
