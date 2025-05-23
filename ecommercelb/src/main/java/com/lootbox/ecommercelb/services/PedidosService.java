@@ -62,7 +62,7 @@ public class PedidosService {
 		return pedido;
 	}//createPedido()
 	
-	public Pedido updatePedido(Long id, Date fecha, Double precioTotal, String status) throws ParseException{
+	public Pedido updatePedido(Long id, Date fecha, Double precioTotal, String status){
 		for (Pedido pedido : pedidos) {
 			if(pedido.getIdPedido()==id) {
 				if(fecha!=null) pedido.setPedido(fecha);
