@@ -31,8 +31,14 @@ public class JwtFilter extends GenericFilterBean {
 
 		if (uri.contains("/api/usuarios/")) {
 			requiereToken = true;
+			if (method.equals("POST")) {
+				requiereToken = false;
+			}
 		} else if (uri.contains("/api/prod/") && 
 				  (method.equals("POST") || method.equals("PUT") || method.equals("DELETE"))) {
+			requiereToken = true;
+		} else if (uri.contains("/api/pedidoprod/") &&
+				(method.equals("POST") || method.equals("PUT") || method.equals("DELETE"))) {
 			requiereToken = true;
 		}
 

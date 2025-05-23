@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/pedidoprod")
+@RequestMapping("/api/pedidoprod/")
 public class PedidoshasProductController {
 
     @Autowired
@@ -19,7 +19,7 @@ public class PedidoshasProductController {
         return service.getAll();
     }
 
-    @GetMapping("/{idPedido}")
+    @GetMapping("{idPedido}")
     public List<PedidoshasProduct> getByPedidoId(@PathVariable Long idPedido) {
         return service.getByPedidoId(idPedido);
     }
@@ -29,12 +29,12 @@ public class PedidoshasProductController {
         return service.create(nuevo);
     }
 
-    @PutMapping("/{idPedidoProd}")
+    @PutMapping("{idPedidoProd}")
     public PedidoshasProduct update(@PathVariable Long idPedidoProd, @RequestBody PedidoshasProduct updated) {
         return service.update(idPedidoProd, updated);
     }
 
-    @DeleteMapping("/{idPedidoProd}")
+    @DeleteMapping("{idPedidoProd}")
     public String delete(@PathVariable Long idPedidoProd) {
         boolean removed = service.delete(idPedidoProd);
         return removed ? "eliminado" : "No encontrado";
