@@ -1,14 +1,31 @@
 package com.lootbox.ecommercelb.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="usuarios")
 public class Usuarios {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id",unique = true, nullable = false)
 	private Long idUsuario;//clase wrapper
+	@Column(nullable = false)
 	private String nombre;
+	@Column(nullable = false)
 	private String email;
+	@Column(nullable = false)
 	private String telefono;
+	@Column(nullable = false)
 	private String contraseña;//clase wrapper
+	@Column(nullable = false)
 	private String direccion;
+	@Column(nullable = false)
 	private Boolean isAdmin;
-	private static Long total = Long.valueOf(0);
 	public Usuarios(String nombre, String email, String telefono, String contraseña, String direccion) {
 		
 		this.nombre = nombre;
@@ -17,14 +34,9 @@ public class Usuarios {
 		this.contraseña = contraseña;
 		this.direccion = direccion;
 		this.isAdmin = false;
-		Usuarios.total++;
-		this.idUsuario = Usuarios.total;
 	}//constructor con campos
 	
-	public Usuarios () {
-		Usuarios.total++;
-		this.idUsuario = Usuarios.total;
-	} //constructor vacío
+	public Usuarios () {} //constructor vacío
 
 	public String getNombre() {
 		return nombre;
