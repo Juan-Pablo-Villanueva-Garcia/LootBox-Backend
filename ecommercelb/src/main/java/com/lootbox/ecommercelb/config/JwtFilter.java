@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.filter.GenericFilterBean;
 
+import com.lootbox.ecommercelb.extras.HttpMethod;
+import com.lootbox.ecommercelb.extras.MethodCheck;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -16,6 +19,7 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
 
 public class JwtFilter extends GenericFilterBean {
+	
 	public static String secret = "CocoMiniRockyRamonaLuigiYoshiLiaBenjiMikePorfirioOliviaNinaMaddyZeroCamilo";
 
 	@Override
@@ -23,42 +27,36 @@ public class JwtFilter extends GenericFilterBean {
 			throws IOException, ServletException {
 		
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-		String authHeader = httpServletRequest.getHeader("Authorization");
 		String uri = httpServletRequest.getRequestURI();
-		String method = httpServletRequest.getMethod();
-
-		boolean requiereToken = false;
-
-		if (uri.contains("/api/usuarios/")) {
-			requiereToken = true;
-			if (method.equals("POST")) {
-				requiereToken = false;
-			}
-		} else if (uri.contains("/api/prod/") && 
-				  (method.equals("POST") || method.equals("PUT") || method.equals("DELETE"))) {
-			requiereToken = true;
-		} else if (uri.contains("/api/pedidoprod/") &&
-				(method.equals("POST") || method.equals("PUT") || method.equals("DELETE"))) {
-			requiereToken = true;
-		}
-
+		HttpMethod method = HttpMethod.valueOf(httpServletRequest.getMethod());
+		
+		boolean requiereToken =
+					(uri.contains("/api/pedidoprod/"))
+				||	(uri.contains("/api/usuarios/") && !MethodCheck.registro.contains(method)) 
+				||	(uri.contains("/api/pedidos/") && MethodCheck.escritura.contains(method))
+			    || 	(uri.contains("/api/prod/") && MethodCheck.escritura.contains(method));
+			    
 		if (requiereToken) {
+			String authHeader = httpServletRequest.getHeader("Authorization");
 			if (authHeader == null || !authHeader.startsWith("Bearer: ")) {
 				System.out.println("1. Invalid Token");
 				throw new ServletException("1. Invalid Token");
-			}
-			String token = authHeader.substring(7);
+			}//Validar que se recibió un dato.
 			try {
-				Claims claims = Jwts.parser().setSigningKey(secret)
-					.parseClaimsJws(token).getBody();
-				claims.forEach((key, value) -> 
-					System.out.println("Key: " + key + " value: " + value));
+				Claims claims = Jwts.parser()
+						.setSigningKey(secret)
+						.parseClaimsJws(authHeader.substring(7)) //Se elimina el auth y se mantiene la key
+						.getBody();
+				
+				claims.forEach((key, value) -> {
+					System.out.println("Key: " + key + " value: " + value);
+				});
+				
 			} catch (SignatureException | MalformedJwtException | ExpiredJwtException e) {
 				System.out.println("2. Invalid Token");
 				throw new ServletException("2. Invalid Token");
-			}
-		}
-
+			}//catch
+		}//if-token
 		chain.doFilter(request, response);
-	}
-}
+	}//doFilter()
+}//class JwtFilter

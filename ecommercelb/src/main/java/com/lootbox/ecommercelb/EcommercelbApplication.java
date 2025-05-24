@@ -21,6 +21,7 @@ public class EcommercelbApplication {
 		registrationBean.addUrlPatterns("/api/usuarios/*");
 		registrationBean.addUrlPatterns("/api/prod/*");
 		registrationBean.addUrlPatterns("/api/pedidoprod/*");
+		registrationBean.addUrlPatterns("/api/pedidos/*");
 		return registrationBean;
 	}
 }
