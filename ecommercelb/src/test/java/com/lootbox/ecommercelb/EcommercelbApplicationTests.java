@@ -10,7 +10,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lootbox.ecommercelb.dto.ChangePassword;
 import com.lootbox.ecommercelb.models.Producto;
+import com.lootbox.ecommercelb.models.Usuario;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -25,7 +27,7 @@ import static org.hamcrest.Matchers.containsString;
 @SpringBootTest
 @AutoConfigureMockMvc //PErmite realizar las pruebas unitarias, levanta el servidor
 class EcommercelbApplicationTests {
-	private final String token = "Bearer: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb3JyZW9AZG9taW5pby5tZXgiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0ODI4ODcwMywiZXhwIjoxNzQ4Mzc1MTAzfQ.RJlUJbth60rlGYjlb20tQeDdIP2K78N0-K6O3XCyJkU";
+	private final String token = "Bearer: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaW5waW4xMjNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDgyOTAzNjYsImV4cCI6MTc0ODM3Njc2Nn0.UQwEg7Voqn0eWQVhF32WbUFg6MdUKIYQrDAaejBiicY";
 	
 	@Autowired
 	private MockMvc mockMvc;//Punto d epartida para probar los métodos
@@ -88,7 +90,7 @@ class EcommercelbApplicationTests {
 		.andExpect(content().string(containsString("Producto nuevo")));
 		//.andExpect(content().string(containsString("Pluma.jpg")));
 	}//pruebaPOST()
-	
+//	
 	
 	
 	private static String asJsonString(final Object obj) {
@@ -99,7 +101,73 @@ class EcommercelbApplicationTests {
 		}//catch
 	}//asJsonString
 	
-	
+	@Test
+	@DisplayName("Se pureba el Get del endpoint http://localhost:8080/api/usuarios/1")
+	void pruebaGETUser() throws Exception {
+		this.mockMvc.perform(get("/api/usuarios/3")
+				.contentType(MediaType.APPLICATION_JSON)
+				.header("Authorization", token))
+		.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(content().string(containsString("MIN2")));
+	}//pruebaGETUser()
+	@Test
+	@DisplayName("Se pureba el Get del endpoint http://localhost:8080/api/usuarios")
+	void pruebaGETUsers() throws Exception {
+		this.mockMvc.perform(get("/api/usuarios/")
+				.contentType(MediaType.APPLICATION_JSON)
+				.header("Authorization", token))
+		.andDo(print())
+		.andExpect(status().isOk());
+	}//pruebaGETUsers()
+	@Test
+	@Disabled("Se probó una vez, se deshabiliata a la siguientes")
+	@DisplayName("Se pureba el delete del endpoint http://localhost:8080/api/usuarios/1")
+	void pruebaDELETEeusers() throws Exception {
+		this.mockMvc.perform(delete("/api/usuarios/1")
+				.contentType(MediaType.APPLICATION_JSON)
+				.header("Authorization", token))
+		.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(content().string(containsString("Simon")));
+	}//pruebaDeleteUsers()
+	@Test
+	@Disabled("Se probó una vez, se deshabiliata a la siguientes")
+	@DisplayName("Se pureba el post del endpoint http://localhost:8080/api/usuarios/")
+	void pruebaPOSTeusers() throws Exception {
+		Usuario u = new Usuario(
+				"MIN2",
+				"min2@gmail.com",
+				"5512345678",
+				"contra",
+				"sasdfasdfasdf"
+				);
+				
+		this.mockMvc.perform(post("/api/usuarios/")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(asJsonString(u))
+				.header("Authorization", token))
+		.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(content().string(containsString("MIN2")));
+	}//pruebaPOST()
+	@Test
+	@DisplayName("Se pureba el POST del endpoint http://localhost:8080/api/usuarios/2")
+	void pruebaPUTUsuarios() throws Exception {
+		ChangePassword c = new ChangePassword(
+				
+					  "contra",
+					  "fin1234"
+					
+				);
+		this.mockMvc.perform(put("/api/usuarios/3?password=324242")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(asJsonString(c))
+		        .header("Authorization", token))
+		    .andDo(print())
+		    .andExpect(status().isOk())
+		    .andExpect(content().string(containsString("MIN2")));
+	}//pruebaPUT()
 	
 
 }//Class EcommerceApplicationTests

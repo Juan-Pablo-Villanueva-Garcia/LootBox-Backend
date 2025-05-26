@@ -46,7 +46,7 @@ public class UsuariosController {
 		return usuariosService.deletUsuario(id);
 	}//deletUsuario
 	@PutMapping(path="{usuarioId}")//http://localhost:8080/api/usuarios/1
-	public Usuario updateUsuario(@PathVariable("idUsuario")Long id,
+	public Usuario updateUsuario(@PathVariable("usuarioId")Long id,
 			@RequestBody ChangePassword changePassword) {
 		return usuariosService.updateUsuario(id,changePassword);
 	}//updateUsuario
