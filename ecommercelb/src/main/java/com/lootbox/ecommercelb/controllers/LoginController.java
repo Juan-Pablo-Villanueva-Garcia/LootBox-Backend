@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lootbox.ecommercelb.models.Usuarios;
+import com.lootbox.ecommercelb.models.Usuario;
 import com.lootbox.ecommercelb.config.JwtFilter;
 import com.lootbox.ecommercelb.dto.Token;
 import com.lootbox.ecommercelb.services.UsuariosService;
@@ -31,7 +31,7 @@ public class LoginController {
 	}//LoginController
 	
 	@PostMapping
-	public Token loginUser(@RequestBody Usuarios usuario) throws ServletException{
+	public Token loginUser(@RequestBody Usuario usuario) throws ServletException{
 		if(usuarioServicio.validateUser(usuario)) {
 			return new Token(generaToken(usuario.getEmail()));
 		}//if validateUser

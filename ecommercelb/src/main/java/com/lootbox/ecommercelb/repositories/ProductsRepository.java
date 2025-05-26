@@ -4,8 +4,8 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.lootbox.ecommercelb.models.Products;
+import com.lootbox.ecommercelb.models.Producto;
 
-public interface ProductsRepository extends JpaRepository<Products, Long> {
-    Optional<Products> findByName(String name);
+public interface ProductsRepository extends JpaRepository<Producto, Long> {
+    Optional<Producto> findByName(String name);
 }//interface ProductsRepository

@@ -6,47 +6,56 @@ import javax.persistence.*;
 @Table(name = "pedidos_has_product")
 public class PedidoshasProduct {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPedidoProd;
-
-    private Long idPedido;
-
-    private Long idUProducto;
+    @EmbeddedId
+    private OrdenId id;
+    
+    @ManyToOne
+    @MapsId("pedidoId")
+    @JoinColumn(name = "pedido_fk")
+    private Pedido pedido;
+    
+    
+    @ManyToOne
+    @MapsId("productoId")
+    @JoinColumn(name = "producto_fk")
+    private Producto producto;
 
     public PedidoshasProduct() {
     }
 
-    public PedidoshasProduct(Long idPedido, Long idUProducto) {
-        this.idPedido = idPedido;
-        this.idUProducto = idUProducto;
+    public PedidoshasProduct(Pedido pedido, Producto producto) {
+        this.pedido = pedido;
+        this.producto = producto;
+        this.id = new OrdenId(pedido.getId(),producto.getId());
     }
 
-    // Getters y Setters
-    public Long getIdPedidoProd() {
-        return idPedidoProd;
-    }
+	public Pedido getPedido() {
+		return pedido;
+	}
 
-    public Long getIdPedido() {
-        return idPedido;
-    }
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
 
-    public void setIdPedido(Long idPedido) {
-        this.idPedido = idPedido;
-    }
+	public Producto getProducto() {
+		return producto;
+	}
 
-    public Long getIdUProducto() {
-        return idUProducto;
-    }
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
 
-    public void setIdUProducto(Long idUProducto) {
-        this.idUProducto = idUProducto;
-    }
+	public OrdenId getIdPedido() {
+		return id;
+	}
 
-    @Override
-    public String toString() {
-        return "PedidoshasProduct [idPedidoProd=" + idPedidoProd + ", idPedido=" + idPedido + ", idUProducto="
-                + idUProducto + "]";
-    }
+	@Override
+	public String toString() {
+		return "PedidoshasProduct [id=" + id + ", pedido=" + pedido + ", producto=" + producto + "]";
+	}
+
+
+
+    
 }
 

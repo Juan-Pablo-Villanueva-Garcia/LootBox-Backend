@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lootbox.ecommercelb.dto.ChangePassword;
-import com.lootbox.ecommercelb.models.Usuarios;
+import com.lootbox.ecommercelb.models.Usuario;
 import com.lootbox.ecommercelb.services.UsuariosService;
 
 @RestController
@@ -30,23 +30,23 @@ public class UsuariosController {
 	}//UsuariosController
 	
 	@GetMapping 
-	public List<Usuarios> getUsiaros(){
+	public List<Usuario> getUsiaros(){
 		return usuariosService.getUsuarios();
 	}//getUsiaros
 	@GetMapping(path="{usuarioId}")//http://localhost:8080/api/usuarios/1
-	public Usuarios getUsuario(@PathVariable("usuarioId")Long id){
+	public Usuario getUsuario(@PathVariable("usuarioId")Long id){
 		return usuariosService.getUsuario(id);
 	}//getUsiaro
 	@PostMapping//http://localhost:8080/api/usuarios
-	public Usuarios addUsuario(@RequestBody Usuarios usuario) {
+	public Usuario addUsuario(@RequestBody Usuario usuario) {
 		return usuariosService.addUsuario(usuario);
 	}//addUsuario
 	@DeleteMapping(path="{usuarioId}")//http://localhost:8080/api/usuarios/1
-	public Usuarios deletUsuario(@PathVariable("usuarioId")Long id) {
+	public Usuario deletUsuario(@PathVariable("usuarioId")Long id) {
 		return usuariosService.deletUsuario(id);
 	}//deletUsuario
 	@PutMapping(path="{usuarioId}")//http://localhost:8080/api/usuarios/1
-	public Usuarios updateUsuario(@PathVariable("idUsuario")Long id,
+	public Usuario updateUsuario(@PathVariable("idUsuario")Long id,
 			@RequestBody ChangePassword changePassword) {
 		return usuariosService.updateUsuario(id,changePassword);
 	}//updateUsuario

@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lootbox.ecommercelb.models.Products;
+import com.lootbox.ecommercelb.models.Producto;
 import com.lootbox.ecommercelb.repositories.ProductsRepository;
 
 @Service
@@ -18,25 +18,25 @@ public class ProductsService {
         this.productsRepository = productsRepository;
     }//constructor
 
-	public List<Products> getProducts() {
+	public List<Producto> getProducts() {
 		return productsRepository.findAll();
 	}//getProducts
 	
-	public Products getProduct(Long id) {
+	public Producto getProduct(Long id) {
 		return productsRepository.findById(id)
 				.orElseThrow(()-> new IllegalArgumentException("Producto con ID [" + id + "] no encontrado."));
 	}//getProduct
 
-	public Products addProduct(Products producto) {
-		Optional<Products> prod = productsRepository.findByName(producto.getName());
+	public Producto addProduct(Producto producto) {
+		Optional<Producto> prod = productsRepository.findByName(producto.getName());
 		if (prod.isEmpty()) {
 			return productsRepository.save(producto);
 		}//if isEmpty
 		return null;
 	}//addProduct
 
-	public Products deleteProduct(Long id) {
-		Products tmp = null;
+	public Producto deleteProduct(Long id) {
+		Producto tmp = null;
 		if (productsRepository.existsById(id)) {
 			tmp = productsRepository.findById(id).get();
 			productsRepository.deleteById(id);
@@ -44,11 +44,11 @@ public class ProductsService {
 		return tmp;
 	}//deleteProduct
 
-	public Products updateProduct(Long id, String name, String imagen, String descripcion, String category, Double price, String jSON, Integer sku, Integer stock, Double costo) {
-		Products tmp = null;
+	public Producto updateProduct(Long id, String name, String imagen, String descripcion, String category, Double price, String jSON, Integer sku, Integer stock, Double costo) {
+		Producto tmp = null;
 		if(productsRepository.existsById(id)) {
 			if (productsRepository.existsById(id)) {
-				Products producto = productsRepository.findById(id).get();
+				Producto producto = productsRepository.findById(id).get();
 				if (name!= null) producto.setName(name);
 				if (imagen!= null) producto.setImagen(imagen);
 				if (descripcion!= null) producto.setDescripcion(descripcion);

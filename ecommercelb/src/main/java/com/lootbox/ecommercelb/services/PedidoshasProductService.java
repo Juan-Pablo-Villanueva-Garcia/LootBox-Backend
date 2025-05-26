@@ -1,6 +1,8 @@
 package com.lootbox.ecommercelb.services;
 
 import com.lootbox.ecommercelb.models.PedidoshasProduct;
+import com.lootbox.ecommercelb.models.Pedido;
+
 import com.lootbox.ecommercelb.repositories.PedidoshasProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +22,9 @@ public class PedidoshasProductService {
     }
 
     // Obtener registros con idPedido
-    public List<PedidoshasProduct> getByPedidoId(Long idPedido) {
-        return repository.findByIdPedido(idPedido);
+    public List<PedidoshasProduct> getByPedidoId(Long pedidoId) {
+        return null;
+    	//return repository.findById(pedidoId);
     }
 
     // Nuevo registro
@@ -34,8 +37,8 @@ public class PedidoshasProductService {
         Optional<PedidoshasProduct> optional = repository.findById(idPedidoProd);
         if (optional.isPresent()) {
             PedidoshasProduct existente = optional.get();
-            existente.setIdPedido(updated.getIdPedido());
-            existente.setIdUProducto(updated.getIdUProducto());
+            existente.setPedido(updated.getPedido());
+            existente.setProducto(updated.getProducto());
             return repository.save(existente);
         } else {
             return null; 

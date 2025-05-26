@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lootbox.ecommercelb.models.Products;
+import com.lootbox.ecommercelb.models.Producto;
 import com.lootbox.ecommercelb.services.ProductsService;
 
 @RestController
@@ -28,27 +28,27 @@ public class ProductosController {
 	}//ProductosController
 	
 	@GetMapping
-	public List<Products>getProductos(){
+	public List<Producto>getProductos(){
 		return productsService.getProducts();
 	}//getProductos
 	
 	@GetMapping(path ="{id}") // http://localhost:8080/api/prod/1
-	public Products getProducto(@PathVariable("id") Long id) {
+	public Producto getProducto(@PathVariable("id") Long id) {
 		return productsService.getProduct(id);
 	}//getProducto
 	
 	@PostMapping
-	public Products addProducto(@RequestBody Products product) {
+	public Producto addProducto(@RequestBody Producto product) {
 		return productsService.addProduct(product);
 	}//addProducto
 	
 	@DeleteMapping(path = "{id}") // http://localhost:8080/api/prod/1
-	public Products deleteProducto(@PathVariable("id") Long id) {
+	public Producto deleteProducto(@PathVariable("id") Long id) {
 		return productsService.deleteProduct(id);
 	}//deleteProducto
 	
 	@PutMapping(path = "{id}") //  http://localhost:8080/api/prod/1
-	public Products updateProducto(@PathVariable("id") Long id,
+	public Producto updateProducto(@PathVariable("id") Long id,
 			@RequestParam(required = false) String name,
 	        @RequestParam(required = false) String imagen,
 	        @RequestParam(required = false) String descripcion,

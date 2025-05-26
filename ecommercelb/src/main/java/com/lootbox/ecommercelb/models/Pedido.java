@@ -1,11 +1,17 @@
 package com.lootbox.ecommercelb.models;
 //import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -16,33 +22,32 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idPedido;//clase wrapper
+	private Long id;//clase wrapper
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-//	 @Temporal(TemporalType.TIMESTAMP)
     private Date pedidoAt;
-	//private Date pedido;
-	private Long idUsuario;
 	private Double precioTotal;
 	private String status;//clase wrapper
-	//private static Long total = Long.valueOf(0);
+	@ManyToOne
+	@JoinColumn(name = "usuario_fk")
+	private Usuario usuario; // Atributo al que se refiere el mappedBy
+	
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<PedidoshasProduct> pedidos_has_product = new HashSet<>();
 	
 	
-	public Pedido(Date fecha, Long idUsuario, Double precioTotal, String status) {
+	
+	public Pedido(Date fecha, Double precioTotal, String status, Usuario usuario) {
 		this.pedidoAt = fecha;
-		this.idUsuario = idUsuario;
+		this.usuario = usuario;
 		this.precioTotal = precioTotal;
 		this.status = status;
-		//Pedido.total++;
-		//this.idPedido = Pedido.total;	
 	} //Constructor con campos
 	
-	public Pedido () {
-	
-	} //Constructor vacío
+	public Pedido () {} //Constructor vacío
 	
 	//Getters and Setters
-	public Long getIdPedido() {
-		return idPedido;
+	public Long getId() {
+		return id;
 	}//getIdPedido
 
 	public Date getPedidoAt() {
@@ -69,13 +74,13 @@ public class Pedido {
 		this.status = status;
 	}//setStatus
 
-	public Long getIdUsuario() {
-		return idUsuario;
+	public Usuario getUsuario() {
+		return this.usuario;
 	}//getIdUsuario
 
 	@Override
 	public String toString() {
-		return "Pedidos [idPedido=" + idPedido + ", pedido=" + pedidoAt + ", idUsuario=" + idUsuario + ", precioTotal="
+		return "Pedidos [id=" + id + ", pedido=" + pedidoAt + ", Usuario=" + usuario + ", precioTotal="
 				+ precioTotal + ", status=" + status + "]";
 	}//toString
 	

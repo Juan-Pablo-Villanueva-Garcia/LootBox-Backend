@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lootbox.ecommercelb.models.Pedido;
+import com.lootbox.ecommercelb.models.Usuario;
 import com.lootbox.ecommercelb.repositories.PedidosRepository;
 
 
@@ -59,10 +60,10 @@ public class PedidosService {
 
 	public Pedido createPedido(Pedido pedido) {
 		
-		Long idUsuario = pedido.getIdUsuario();
+		Usuario usuario = pedido.getUsuario();
 		Date pedidoAt = pedido.getPedidoAt();
 		
-		Optional<Pedido> consulta = pedidosRepository.findByIdUsuario(idUsuario);
+		Optional<Pedido> consulta = pedidosRepository.findByUsuario(usuario);
 		
 		if(consulta.isPresent() && pedidoAt.equals(consulta.get().getPedidoAt()))
 			return null;

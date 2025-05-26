@@ -5,9 +5,9 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.lootbox.ecommercelb.models.Usuarios;
+import com.lootbox.ecommercelb.models.Usuario;
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuarios, Long> {
-	Optional<Usuarios> findByEmail(String email);
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+	Optional<Usuario> findByEmail(String email);
 
 }//UsuarioRepository

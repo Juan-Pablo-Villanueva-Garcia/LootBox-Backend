@@ -1,19 +1,23 @@
 package com.lootbox.ecommercelb.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "productos")
-public class Products {
+public class Producto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	private Long idProductos;//clase wrapper
+	private Long id;//clase wrapper
 	
 	@Column(nullable = false)
 	private String name;
@@ -23,12 +27,17 @@ public class Products {
 	@Column(nullable = false)
 	private Double price;//clase wrapper
 	private String JSON;
+	@Column(unique = true)
 	private Integer sku;
+	@Column(nullable = false)
 	private Integer stock;
 	private Double costo;
-	private static Long total = Long.valueOf(0);
+//	private static Long total = Long.valueOf(0);
+	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<PedidoshasProduct> pedidos_has_product = new HashSet<>();
 	
-	public Products(String name, String imagen, String descripcion, String category, Double price, String jSON,
+	
+	public Producto(String name, String imagen, String descripcion, String category, Double price, String jSON,
 			Integer sku, Integer stock, Double costo) {
 		
 		this.name = name;
@@ -40,13 +49,13 @@ public class Products {
 		this.sku = sku;
 		this.stock = stock;
 		this.costo = costo;
-		Products.total++;
-		this.idProductos = Products.total;
+//		Producto.total++;
+//		this.id = Producto.total;
 	}//Constructor con campos
 	
 
 	//Getters and Setters
-	public Products () {
+	public Producto () {
 	} //Constructor vacio
 
 	public String getName() {
@@ -103,13 +112,13 @@ public class Products {
 	public void setCosto(Double costo) {
 		this.costo = costo;
 	}//setCosto
-	public Long getIdProductos() {
-		return idProductos;
+	public Long getId() {
+		return id;
 	}//getIdProductos
 	
 	@Override
 	public String toString() {
-		return "Products [idProductos=" + idProductos + ", name=" + name + ", imagen=" + imagen + ", descripcion="
+		return "Products [id=" + id + ", name=" + name + ", imagen=" + imagen + ", descripcion="
 				+ descripcion + ", category=" + category + ", price=" + price + ", JSON=" + JSON + ", sku=" + sku
 				+ ", stock=" + stock + ", costo=" + costo + "]";
 	}//toString

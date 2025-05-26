@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.lootbox.ecommercelb.dto.ChangePassword;
-import com.lootbox.ecommercelb.models.Usuarios;
+import com.lootbox.ecommercelb.models.Usuario;
 import com.lootbox.ecommercelb.repositories.UsuarioRepository;
 
 @Service
@@ -34,28 +34,28 @@ public class UsuariosService {
 		this.usuarioRepository = usuarioRepository;
 	}
 
-	public List<Usuarios> getUsuarios() {
+	public List<Usuario> getUsuarios() {
 		return usuarioRepository.findAll();
 	}//getUsuarios
-	public Usuarios getUsuario(Long id) {
-		Usuarios tmp = null;
+	public Usuario getUsuario(Long id) {
+		Usuario tmp = null;
 		if(usuarioRepository.existsById(id)) {
 			tmp = usuarioRepository.findById(id).get();
 		}//if	
 	return tmp;
 	}//getUsuario
-	public Usuarios addUsuario(Usuarios usuario) {
-		 Optional<Usuarios> user = usuarioRepository.findByEmail(usuario.getEmail());
+	public Usuario addUsuario(Usuario usuario) {
+		 Optional<Usuario> user = usuarioRepository.findByEmail(usuario.getEmail());
 		 if(user.isEmpty()) {
-			 usuario.setContraseña( encoder.encode(usuario.getContraseña()));
+			 usuario.setPassword( encoder.encode(usuario.getPassword()));
 			 usuarioRepository.save(usuario);
 		 }else {
 			 usuario = null;
 		 }
 		return usuario;
 	}//addUsuario
-	public Usuarios deletUsuario(Long id) {
-		Usuarios tmp =null;
+	public Usuario deletUsuario(Long id) {
+		Usuario tmp =null;
 		if(usuarioRepository.existsById(id)) {
 			tmp = usuarioRepository.findById(id).get();
 			usuarioRepository.deleteById(id);
@@ -63,12 +63,12 @@ public class UsuariosService {
 		return tmp;
 	}//deletUsuario
 
-	public Usuarios updateUsuario(Long id, ChangePassword changePassword) {
-		Usuarios user = null;
+	public Usuario updateUsuario(Long id, ChangePassword changePassword) {
+		Usuario user = null;
 		 if (usuarioRepository.existsById(id)) {
 		        user = usuarioRepository.findById(id).get();
-		        if (encoder.matches(changePassword.getPassword(), user.getContraseña())) {
-		            user.setContraseña(encoder.encode(changePassword.getNpassword()));
+		        if (encoder.matches(changePassword.getPassword(), user.getPassword())) {
+		            user.setPassword(encoder.encode(changePassword.getNpassword()));
 		            usuarioRepository.save(user);
 		        } else {
 		            user = null;
@@ -78,11 +78,11 @@ public class UsuariosService {
 		return user;
 	}//updateUsuario
 
-	public boolean validateUser(Usuarios usuario) {
-		Optional<Usuarios> user = usuarioRepository.findByEmail(usuario.getEmail());
+	public boolean validateUser(Usuario usuario) {
+		Optional<Usuario> user = usuarioRepository.findByEmail(usuario.getEmail());
 		if(user.isPresent()) {
-			Usuarios tmp = user.get();
-			if(encoder.matches(usuario.getContraseña(), tmp.getContraseña())) return true;//matches
+			Usuario tmp = user.get();
+			if(encoder.matches(usuario.getPassword(), tmp.getPassword())) return true;//matches
 		}///isPresent
 		return false;
 	}//validateUser
