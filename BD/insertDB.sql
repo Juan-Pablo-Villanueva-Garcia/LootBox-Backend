@@ -1,8 +1,8 @@
-USE `LootBox` ;
+USE `ecommercelb` ;
 
 -- Insertar elementos en Productos-------------------------------
 
-INSERT INTO productos (name, img, descripcion, category, price, rating, sku, stock, costo)
+INSERT INTO productos (name, imagen, descripcion, category, price, json, sku, stock, costo)
 VALUES
 ('LootBox Común', 'https://res.cloudinary.com/dsjcemt6v/image/upload/v1747185374/Lootbox-C2_tffytg.webp', '¡Tu LootBox gamer está lista! Sorpresas épicas, coleccionables y productos que te harán subir de nivel.', 0, 2500.00, '{"rate": 4.7, "count": 1850}', 1100, 250, 2250.00),
 ('LootBox Épica', 'https://res.cloudinary.com/dsjcemt6v/image/upload/v1747185373/Lootbox-M2_ahrznc.webp', 'Sorpresas épicas en cada caja. ¿Estás listo para el drop?', 0, 4000.00, '{"rate": 4.9, "count": 860}', 1110, 98, 3600.00),
