@@ -76,9 +76,10 @@ class EcommercelbApplicationTests {
 				"{calif:4.4,count:234}",
 				234,
 				99,
-				135.00
-				//tring name, String imagen, String descripcion, String category, Double price, String jSON,
-				//Integer sku, Integer stock, Double costo
+				135.00,
+				1L
+				//String name, String imagen, String descripcion, String category, Double price, String jSON,
+				//Integer sku, Integer stock, Double costo, Long categoriaid
 				);
 				
 		this.mockMvc.perform(post("/api/prod/")

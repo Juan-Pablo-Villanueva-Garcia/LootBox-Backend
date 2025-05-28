@@ -3,6 +3,7 @@ package com.lootbox.ecommercelb.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import com.lootbox.ecommercelb.services.ProductsService;
 
 @RestController
 @RequestMapping(path="/api/prod/") // http://localhost:8080/api/prod/
+@CrossOrigin(origins ="*")//"https://arghero.github.io/LootBox"
 public class ProductosController {
 	
 	private final ProductsService productsService; 
