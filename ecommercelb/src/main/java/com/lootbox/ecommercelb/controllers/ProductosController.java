@@ -57,7 +57,8 @@ public class ProductosController {
 	        @RequestParam(required = false) String JSON,
 	        @RequestParam(required = false) Integer sku,
 	        @RequestParam(required = false) Integer stock,
-	        @RequestParam(required = false) Double costo) {
-		return productsService.updateProduct(id, name, imagen, descripcion, category, price, JSON, sku, stock, costo);
+	        @RequestParam(required = false) Double costo,
+	        @RequestParam (required = false) Long categoriaid) {
+		return productsService.updateProduct(id, name, imagen, descripcion, category, price, JSON, sku, stock, costo, categoriaid);
 	}//updateProducto
 }//class ProductosController

@@ -32,13 +32,15 @@ public class Producto {
 	@Column(nullable = false)
 	private Integer stock;
 	private Double costo;
+	@Column(nullable=false)
+	private Long categoriaid;
 //	private static Long total = Long.valueOf(0);
 	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<PedidoshasProduct> pedidos_has_product = new HashSet<>();
 	
 	
 	public Producto(String name, String imagen, String descripcion, String category, Double price, String jSON,
-			Integer sku, Integer stock, Double costo) {
+			Integer sku, Integer stock, Double costo, Long categoriaid) {
 		
 		this.name = name;
 		this.imagen = imagen;
@@ -49,6 +51,7 @@ public class Producto {
 		this.sku = sku;
 		this.stock = stock;
 		this.costo = costo;
+		this.categoriaid = categoriaid;
 //		Producto.total++;
 //		this.id = Producto.total;
 	}//Constructor con campos
@@ -58,6 +61,12 @@ public class Producto {
 	public Producto () {
 	} //Constructor vacio
 
+	public Long getCategoriaid() {
+		return categoriaid;
+	}//getCategoriaid
+	public void setCategoriaid(Long categoriaid) {
+		this.categoriaid = categoriaid;
+	}//setCategoriaid
 	public String getName() {
 		return name;
 	}//getName
@@ -120,7 +129,7 @@ public class Producto {
 	public String toString() {
 		return "Products [id=" + id + ", name=" + name + ", imagen=" + imagen + ", descripcion="
 				+ descripcion + ", category=" + category + ", price=" + price + ", JSON=" + JSON + ", sku=" + sku
-				+ ", stock=" + stock + ", costo=" + costo + "]";
+				+ ", stock=" + stock + ", costo=" + costo + ", categoriaid=" +  categoriaid +"]";
 	}//toString
 	
 }//class Products

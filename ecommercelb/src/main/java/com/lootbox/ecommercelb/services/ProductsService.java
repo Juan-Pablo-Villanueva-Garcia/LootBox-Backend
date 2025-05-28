@@ -44,7 +44,7 @@ public class ProductsService {
 		return tmp;
 	}//deleteProduct
 
-	public Producto updateProduct(Long id, String name, String imagen, String descripcion, String category, Double price, String jSON, Integer sku, Integer stock, Double costo) {
+	public Producto updateProduct(Long id, String name, String imagen, String descripcion, String category, Double price, String jSON, Integer sku, Integer stock, Double costo, Long categoriaid) {
 		Producto tmp = null;
 		if(productsRepository.existsById(id)) {
 			if (productsRepository.existsById(id)) {
@@ -58,6 +58,7 @@ public class ProductsService {
 				if (sku!= null) producto.setSku(sku);
 				if (stock!= null) producto.setStock(stock);
 				if (costo!= null) producto.setCosto(costo);
+				if (categoriaid!= null) producto.setCategoriaid(categoriaid);
 				tmp = producto;
 			}//if
 		}//for
