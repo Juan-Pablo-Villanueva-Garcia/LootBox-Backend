@@ -73,9 +73,9 @@ public class Usuario {
 		this.direccion = direccion;
 	}//setDireccion
 
-	public Boolean getIsAdmin(Boolean isAdmin) {
-		return isAdmin;
-	}//setIsAdmin
+	public Boolean getIsAdmin() {
+	    return isAdmin;
+	}//getIsAdmin
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
