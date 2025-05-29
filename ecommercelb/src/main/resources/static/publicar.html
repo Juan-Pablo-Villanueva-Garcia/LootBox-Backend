@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./styles/styles.css" />
+  <title> Publicar </title>
+</head>
+
+<div id="pantalla-carga">
+    <div class="spinner"></div>
+</div>
+
+<body>
+      <!-- navbar -->
+    <div id="navbar-container"></div>
+
+    <div id="main-container">
+      <form class="container mt-4" >
+        <fieldset>
+            <legend>Creación / Edición de productos</legend>         
+            <div class="row mb-3">
+                <div class="col-md-4">
+                        <label for="Input" class="form-label">SKU</label>
+                        <span id="sku-alert-container"></span>
+                        <input type="text" class="form-control" placeholder="SKU" id="sku" minlength="1" maxlength="4">
+                </div>
+                <div class="col-md-8 mb-3">
+                    <label for="Select" class="form-label">Categoría</label>
+                    <span id="categoria-alert-container"></span>
+                        <select class="form-select" id="selector-categoria">
+                            <option selected disabled hidden value="">Selecciona la categoría</option>
+                            <option value="Consolas">Consolas</option>
+                            <option value="Merch">Merch</option>
+                            <option value="Periféricos">Periféricos</option>
+                            <option value="Videojuegos">Videojuegos</option>
+                        </select>
+                </div> 
+
+                <div class="mb-3 mt-2 container">
+                  <div class="row">
+                    <label for="Input" class="form-label">Producto</label>
+                    <span id="producto-alert-container"></span>
+                  </div>
+                    <div class="row">
+                    <input type="text" class="form-control" placeholder="Nombre del producto" id="producto" required>
+                    </div>
+                </div>
+                
+            </div>  
+          <div class="mb-3">
+              <label for="TextInput"  class="form-label">Descripción del producto</label>
+              <span id="descripcion-alert-container"></span>
+              <textarea class="form-control" rows="4" placeholder="Escribe aquí..." id="descripcion" required></textarea>          
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-4">
+            <label for="Input" class="form-label">Precio</label>
+            <span id="precio-alert-container"></span>
+            <input type="text" class="form-control" placeholder="$00" id="precio" required>
+          </div>
+          <div class="col-md-4">
+            <label for="Input" class="form-label">Costo</label>
+            <span id="costo-alert-container"></span>
+            <input type="text" class="form-control" placeholder="$00" id="costo" required>
+          </div>
+          <div class="col-md-4">
+            <label for="Input" class="form-label">Cantidad</label>
+            <span id="cantidad-alert-container"></span>
+            <input type="text" class="form-control" placeholder="0" id="cantidad" required>
+          </div>
+
+          <div class="mb-3 mt-3">
+            <label for="upload_widget" class="form-label">Cargar la imagen del producto</label>
+            <span id="fileUpload-alert-container"></span>
+            <div class="d-flex justify-content-around align-items-center  p-3 rounded-3 bg-white shadow text-dark gap-3" id="fileImageContainer">
+              <button id="upload_widget" class="cloudinary-button p-0 w-25" style="background-color: var(--orange);">Subir imagen</button>
+              <p class="text-start align-middle container bg-white text-dark" id="img_fileName"></p>
+              <img src="" alt="" id="output" style="border-radius: 5px; box-shadow:10px 10px 5px rgba(0, 0, 0, 0.5); border: 1px solid black;">
+            </div>
+            
+          </div>
+        </div>
+
+          <button type="submit" class="btn btn-primary" id="btn-publicar">Publicar</button>
+        </fieldset>
+      </form> <br>
+
+<!-- Tabla -->
+    <table class="container table table-striped" id="tabla-items" >
+      <thead class="w-100">
+        <th class="table-primary d-none d-md-table-cell"></th>
+        <th class="table-primary">SKU</th>
+        <th class="table-primary">Producto</th>
+        <th class="table-primary d-none d-md-table-cell">Categoría</th>
+        <th class="table-primary d-none d-md-table-cell">Precio</th> <!-- Agregado d-none d-md-table-cell -->
+        <th class="table-primary d-none d-md-table-cell">Cantidad</th> <!-- Agregado d-none d-md-table-cell -->
+        <th class="table-primary"></th>
+
+      </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+</div>
+  <div id="footer-container"></div>
+  <script src="https://upload-widget.cloudinary.com/latest/global/all.js" type="text/javascript"></script>
+  <script type="module" src="./scripts/loader.js"></script>
+  <script src="./scripts/publicar.js"></script>
+  
+</body>
+
+</html>

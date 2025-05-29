@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./styles/styles.css" />
+  <title> Contáctanos </title>
+</head>
+
+<div id="pantalla-carga">
+    <div class="spinner"></div>
+</div>
+
+<body>
+  <!-- NavBar prueba -->
+  <div id="navbar-container">
+
+  </div> <!-- NavBar -->
+  <div id="main-container"></div>
+  
+  <!--No tocar-->
+  <div class="container my-4 px-0">
+    <div class="row justify-content-center">
+      <!-- Redes -->
+      <div class="col-12 col-md-5 px-5 py-5 mb-">
+        <legend>¿Tienes dudas o comentarios?</legend>
+        <p>Utiliza éste formulario para contactarnos<p>
+        
+        <div id="facebook" class="info-block">
+          <table>
+            <td>
+              <div style="display: flex; align-items: center;">
+                <a href="https://www.facebook.com/share/1HR1TCrcEX/" target="_blank">
+                  <img src="./assets/images/F.png" alt="Logo Facebook" width="45">
+                </a>
+                <h3 style="margin: 0;">Facebook</h3>
+              </div>
+              <p class="px-4">
+                👥 Únete a la comunidad Loot Box:
+                🎮 | Gamers, sorpresas y mucha diversión.|
+                👉🏻 Síguenos en Facebook y sé parte del mundo gamer. 🚀
+              </p>
+            </td>
+            </tr>
+          </table>
+        </div>
+        <div id="instagram" class="info-block">
+          <table>
+            <td>
+              <div style="display: flex; align-items: center;">
+                <a href="https://www.instagram.com/lootboxx25?igsh=cXkxdjB4NzNxZ3p0" target="_blank">
+                  <img src="./assets/images/i.png" alt="Logo Instagram" width="45">
+                </a>
+                <h3 style="margin: 0;">Instagram</h3>
+              </div>
+              <p class="px-4">
+                🎮 Videojuegos | 🎧 Accesorios | 📦 Cajas sorpresa.  
+                   ¡Cada box es una aventura!  
+                🚀 Envíos a todo México  
+                📩 DM para pedidos
+              </p>
+            </td>
+          </table>
+        </div>
+      </div>
+      
+      <!-- Form -->
+      <div class="col-12 col-md-6 mb-4 d-flex flex-column justify-content-center align-items-center">
+        <aside>
+        <div class="container px-4 px-0 md-8">
+          <div class="row justify-content-center">
+            <form class="w-100 p-3">
+              <div class="alert alert-danger fade show" style="display:none;"
+              role="alert" id="alertValidaciones">
+              <p id="alertValidacionesTexto"></p>
+              </div>
+         
+                <legend> Formulario</legend>
+                <div class="mb-3">
+                  <label for="txtNombre" class="form-label"> Nombre y Apellido</label>
+                  <input type="text" id="txtNombre" class="form-control"  autofocus placeholder="Ingresa tu nombre" name="nombre">
+                </div>
+                <div class="mb-3">
+                  <label for="txtCorreo" class="form-label"> Correo Electrónico </label>
+                  <input type="email" id="txtCorreo" class="form-control" placeholder="Ingresa tu correo electrónico" name="email">
+                </div>
+                <div class="mb-3">
+                  <label for="txtTel" class="form-label"> Teléfono </label>
+                  <input type="tel" id="txtTel" class="form-control" placeholder="Ingresa tu teléfono" name="telefono" maxlength="10">
+                </div>
+                <div class="mb-3">
+                <div class="mb-3">
+                  <label for="txtMensaje"> Mensaje o Comentarios </label>
+                  <textarea class="form-control" placeholder="Déjanos tu mensaje o comentario" id="txtMensaje" name="mensaje"></textarea>
+              </div>
+                </div>
+                <button type="submit" class="btn btn-primary" id="btnEnviar"> Enviar </button>
+             
+            </form>
+        </div>
+      </aside></div>
+    </div>
+  </div>
+
+
+      </section>
+    </main>
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+      <script type="text/javascript">
+        (function(){
+          emailjs.init("jqeDzbQ777n58fxQr"); // tu public key
+        })();
+      </script>
+      <script type="module" src="./scripts/loader.js"></script>
+      <script src="./scripts/contactUs.js"></script>
+      
+</body>
+
+</html>
+
+

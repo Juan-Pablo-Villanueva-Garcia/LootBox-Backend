@@ -1,0 +1,425 @@
+:root{
+    --fuente-encabezado: "Alumni Sans Collegiate One";
+    --fuente-texto: "Galindo";
+    --fuente-link:"Irish Grover";
+
+
+    --bg:#000221;
+    --txt:#d9d4d1;
+    --sky:#00c8df;
+    --navy:#003652;
+    --orange:#d35f18;
+    --gray:#3d444b;
+    --txtCont: #aec0c2;
+
+    background-color: var(--bg);
+    color: var(--txt);
+}
+/* Estilos de la mision, vision y valores */
+  body {
+    font-family: "Galindo";
+    background-color: var(--bg);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh ;
+    overflow-x: hidden;
+  }
+
+  #valores .valor-clave {
+  font-weight: bold;
+  color: var(--txt);
+  letter-spacing: 1px;
+}
+
+#mision img,
+#vision img,
+#valores img {
+  filter: invert(1);
+}
+
+#txtReglas .reglas {
+  font-weight: bold;
+}
+
+  .container {
+    padding: 20px;
+    background-color: var(--navy);
+    border-radius: 10px;
+    color: var(--txt);
+  }
+  
+  .info-block{
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    background-color: var(--gray);
+    box-shadow: 5px 5px 15px var(--orange);
+  }
+
+  div.info-block table tr td{
+    vertical-align: middle;
+  }
+
+  h3 {
+    color: var(--sky);
+    margin-top: 0;
+  }
+  
+  ul {
+    padding-left: 20px;
+  }
+  
+  strong {
+    color: #58151c;
+  }
+  
+  img {
+    margin-right: 15px;
+  }
+/* Estilos para texto de pagina inicio */
+ .sticky-text{
+  position: absolute;
+  color: var(--txt);
+  top: 150px;    
+  width: 100%;  
+  text-align: center;
+}
+
+#h5-sticky{
+  color: var(--orange);
+} 
+
+/*ESTILOS PARA LAS TARJETAS*/
+aside section.miembros{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: var(--navy);
+    border-radius: 0.5em;
+}
+aside section.miembros article.card{
+    width: 80%;
+    background-color: var(--gray);
+    box-shadow: 5px 5px 15px var(--orange);
+    border-radius: 1rem;
+    padding-top: 0.5rem;
+}
+aside section.miembros article.card div.presentacion {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+}
+aside section.miembros article.card div.presentacion img{
+    width: 40%;
+    border-radius: 1rem;
+}
+aside section.miembros article.card div.card-body{
+    display: flex;
+    align-items: center;
+}
+.text-color-card{
+    color: var(--txt);
+}
+
+
+/* Estilos para logos redes sociales */
+.redes-sociales i {
+    color: var(--sky); 
+  }
+  
+  .redes-sociales i:hover {
+    color: var(--navy);
+  }
+  
+  .redes-sociales i {
+    font-size: 30px; 
+  }
+  
+  a {
+    text-decoration: none;
+  }
+
+/*Estilos del carrusel*/
+
+section.sobreNosotros{
+    position: relative;
+    width: 100%;
+}
+section.sobreNosotros article.titulo{
+    margin-top: 1rem;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+section.sobreNosotros article.titulo h1{
+    font-family: var(--fuente-encabezado);
+    font-weight: 500;
+}
+section.sobreNosotros article.descripcion{
+    background-color: var(--navy);
+    font-family: var(--fuente-texto);
+    padding: 1rem;
+    border-radius: 1rem;
+    position: absolute;
+    left: 0;
+    bottom: 0;   
+}
+#logosEmpresa div.carousel-inner div.carousel-item img{
+    border-radius: 1rem;
+}
+#separador{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg);
+}
+
+/*Nav bar*/
+#logosEmpresa{
+    background-color: var(--gray);
+    box-shadow: 5px 5px 15px var(--orange);
+    padding: 1%;
+    border-radius: 1rem;
+}
+
+.footer{
+    background-color: var(--navy);
+    color: var(--txt);
+    text-align: center ;
+    font-family: 'Irish Grover', cursive;
+}
+
+/* Btns stlyes */
+.btns-log-ins {
+    background-color: var(--orange);
+}
+
+.btn-primary{
+  background-color: var(--sky);
+  color: #000221;
+  border: none;
+}
+.btn-primary:hover, .btn-primary:active {
+  background-color: var(--orange);
+}
+.btn-puntos .puntos {
+    color: white;
+    transition: color 0.3s ease;
+}
+.btn-puntos:hover .puntos {
+    color: var(--orange);
+}
+
+/* Table */
+#tabla-items { 
+  width: 100%;
+  border-collapse: collapse;
+}
+#tabla-items th,
+ #tabla-items tbody{ 
+ border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Alertas debajo de los labels */
+#sku-alert-container,
+#categoria-alert-container,
+#producto-alert-container,
+#descripcion-alert-container,
+#precio-alert-container,
+#costo-alert-container,
+#cantidad-alert-container,
+#fileUpload-alert-container {
+  display: block;
+  color: red;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+/*===========Carrito de compras==*/
+#cart-items {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+/*====================Pantalla de Carga ==========*/
+#pantalla-carga {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--navy);
+    border-top-color: var(--orange);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+/*--------------------Botones de compra-------------------------*/
+button.add-cart-button{
+  cursor: pointer;
+  transition: all 0.05s ease-in-out;
+}
+button.add-cart-button:active{
+  background-color: var(--navy); 
+}
+
+button.add-cart-button.animado {
+    background-color: var(--orange);
+    transform: scale(1.05);
+}
+
+button.add-cart-button.animado::after {
+    content: "✔";
+    font-size: 1rem;
+}
+
+/*BREAK POINTS....................................................................*/
+@media (max-width: 992px) {
+    section.sobreNosotros article.descripcion {
+        position: static;
+        margin-top: 1rem;
+    }
+}
+
+@media (min-width:768px){
+    .footer{
+        padding: 24px;
+        font-size: 20px;
+    }
+    #separador{
+        flex-direction: row;
+        gap: 1em;
+    }
+    main{
+        width: 50%;
+    }
+    aside{
+        width: 70%;
+    }
+
+    /*modifica ancho de tarjeta*/
+    aside section.miembros article.card{
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+    }
+    aside section.miembros article.card div.presentacion {
+        flex-direction: column;
+        width: 40%;
+        margin: 0 0.5rem;
+        
+    }
+    aside section.miembros article.card div.presentacion img{
+        width: 100%;
+    }
+    
+}
+
+@media(max-width: 527px){
+    .sidebar{
+        background-color: rgba(255, 255, 255, 0, 15);
+        backdrop-filter: blur(10px);
+        width: 100px;
+        
+    }
+}
+/* Tabla productos editar o eliminar  */
+@media (max-width: 450px) {
+  .container-tabla {
+    display: flex;
+    justify-content: center;
+    padding-left: 15px; 
+    padding-right: 15px; 
+    align-items: center;
+  }
+  #tabla-items {
+    width: 90%;
+    display: block; 
+    overflow-x: auto; 
+  }
+  #tabla-items .btn{
+    font-size: 0.8em; 
+    padding: 0.2rem 0.5rem; 
+  }
+
+  #tabla-items thead {
+    display: none; 
+  }
+  #tabla-items tbody tr {
+    margin-bottom: 10px; 
+    border: 1px solid #ccc;
+  }
+
+  #tabla-items td:nth-child(1) img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 50%; 
+    height: auto;
+     text-align: center;
+  }
+  
+
+  #tabla-items td {
+    display: block; 
+    text-align: right; 
+    padding-left: 50%; 
+    position: relative; 
+  }
+
+  #tabla-items td::before {
+    content: attr(data-label); 
+    position: absolute;
+    left: 0;
+    padding-left: 10px;
+    font-weight: bold;
+    text-align: left;
+  }
+
+
+  #tabla-items th,
+  #tabla-items td {
+    font-size: 0.9em;
+    padding: 6px;
+  }
+
+  #tabla-items img {
+    max-width: 3rem;
+    max-height: 3rem;
+  }
+
+}
+
+
+
+#imgContainer {
+  width: 100%;
+  height: 300px;
+  background-image: url('./assets/images/logoLootBox3.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  border-radius: 10px;
+}
+
+#h2-inicio{
+  color: var(--orange);
+}

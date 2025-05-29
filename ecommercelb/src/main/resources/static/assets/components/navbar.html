@@ -1,0 +1,117 @@
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body fixed-top" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="./index.html">
+      <img src="./assets/icons/logoLoot.png" class="img-fluid" alt="Logo LootBox" style="width: 100px;">
+    </a>
+    
+    <div class="d-flex align-items-center">
+    <!-- Carrito solo visible en mobile -->
+  <div class="d-lg-none position-relative me-4 mt-2">
+    <a href="#" class="text-white text-decoration-none fs-2" id="cart-button-mobile" data-bs-toggle="modal" data-bs-target="#cartModal">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span style="width: 20px; height: 20px; font-size: 18px; background-color: var(--orange);" class="position-absolute top-0 start-100 translate-middle badge rounded-circle d-flex align-items-center justify-content-center">
+        <span id="cart-count-mobile" style="margin-top: 3px;">0</span>
+      </span>
+   </a>
+  </div>
+
+    <!-- Toggle -->
+    <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    </div>
+
+    <!-- SideBar -->
+    <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+      aria-labelledby="offcanvasNavbarLabel" style="height: 100% dvh;">
+      <!-- SideBard header -->
+      <div class="offcanvas-header text-white border-bottom">
+        <h5 class="offcanvas-title text-center" id="offcanvasNavbarLabel">
+          <img src="./assets/icons/logoLoot.png" class="w-25 mh-25 " alt="Logo LootBox">
+        </h5>
+        <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="offcanvas"
+          aria-label="Close"></button>
+      </div>
+      <!-- SideBar body-->
+      <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 p-lg-0">
+        <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link" href="./index.html">Inicio</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="./sobreNosotros.html">Sobre Nosotros</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="./contactanos.html">Contáctanos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./nuestrosProductos.html">Nuestros Productos</a>
+          </li>
+          <li class="nav-item mx-2" id="nav-publicar" style="display: none;">
+            <a class="nav-link" href="./publicar.html">Publicar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="user-name" style="display: none;"></a>
+          </li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-3 contenedor-vertical" >
+
+          <!-- login / sign up / logout -->
+          <div id="navActionsContainer" class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3 mx-auto">
+            <a href="./sesion.html" id="login-btn" class="btns-log-ins text-white text-decoration-none px-3 py-1 rounded-4 text-center">Iniciar Sesión</a>
+            <a href="./registro.html" id="signup-btn" class="btns-log-ins text-white text-decoration-none px-3 py-1 rounded-4 text-center">Regístrate</a>
+          </div>
+
+          <!-- Carrito -->
+          <div class="position-relative me-lg-3 my-2 my-lg-0 d-none d-lg-block">
+            <a href="#" class="text-white text-decoration-none fs-2" id="cart-button" data-bs-toggle="modal" data-bs-target="#cartModal">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span style="width: 20px; height: 20px; font-size: 18px; background-color: var(--orange);" class="position-absolute top-0 start-100 translate-middle badge rounded-circle d-flex align-items-center justify-content-center">
+              <span id="cart-count" style="margin-top: 3px ;">0</span>
+              </span>
+            </a>
+          </div>
+           <!-- Carrito -->
+
+        </div>
+        
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Modal del Carrito -->
+<div class="modal fade " id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" >
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content bg-dark text-white rounded-3" style="min-height: 80vh;">
+
+      <div class="modal-header border-0">
+        <h5 class="modal-title" id="cartModalLabel">Carrito de Compras</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <hr class="m-0 p-0 border-secondry"> 
+      
+
+      <div class="modal-body" >
+        <ul id="cart-items" class="list-group list-group-flush bg-dark" style="min-height: 70vh;"></ul>
+      </div>
+
+      <hr class="m-0 p-0 border-secondry">
+
+      <div class="modal-footer d-flex justify-content-between align-items-center border-0">
+        <h5 class="mb-0 fw-bold">Total: $<span id="cart-total">0.00</span></h5>
+        <div class="d-flex gap-2">
+          <button type="button" class="btn btn-secondary rounded-3" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-success rounded-3" id="buy-button">Comprar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
