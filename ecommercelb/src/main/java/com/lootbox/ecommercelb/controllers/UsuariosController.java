@@ -21,35 +21,44 @@ import com.lootbox.ecommercelb.services.UsuariosService;
 @RestController
 @RequestMapping(path="/api/usuarios/")//http://localhost:8080/api/usuarios
 @CrossOrigin(origins ="*")//"https://arghero.github.io/LootBox"
+
 public class UsuariosController {
 
-	private final UsuariosService usuariosService;
-	
-	@Autowired
-	public UsuariosController(UsuariosService usuariosService) {
-		super();
-		this.usuariosService = usuariosService;
-	}//UsuariosController
-	
-	@GetMapping 
-	public List<Usuario> getUsiaros(){
-		return usuariosService.getUsuarios();
-	}//getUsiaros
-	@GetMapping(path="{usuarioId}")//http://localhost:8080/api/usuarios/1
-	public Usuario getUsuario(@PathVariable("usuarioId")Long id){
-		return usuariosService.getUsuario(id);
-	}//getUsiaro
-	@PostMapping//http://localhost:8080/api/usuarios
-	public Usuario addUsuario(@RequestBody Usuario usuario) {
-		return usuariosService.addUsuario(usuario);
-	}//addUsuario
-	@DeleteMapping(path="{usuarioId}")//http://localhost:8080/api/usuarios/1
-	public Usuario deletUsuario(@PathVariable("usuarioId")Long id) {
-		return usuariosService.deletUsuario(id);
-	}//deletUsuario
-	@PutMapping(path="{usuarioId}")//http://localhost:8080/api/usuarios/1
-	public Usuario updateUsuario(@PathVariable("usuarioId")Long id,
-			@RequestBody ChangePassword changePassword) {
-		return usuariosService.updateUsuario(id,changePassword);
-	}//updateUsuario
-}//class UsuariosController
+    private final UsuariosService usuariosService;
+
+    @Autowired
+    public UsuariosController(UsuariosService usuariosService) {
+        this.usuariosService = usuariosService;
+    }
+
+    @GetMapping
+    public List<Usuario> getUsuarios() {
+        return usuariosService.getUsuarios();
+    }
+
+    @GetMapping(path="{usuarioId}")
+    public Usuario getUsuario(@PathVariable("usuarioId") Long id) {
+        return usuariosService.getUsuario(id);
+    }
+
+    @PostMapping
+    public Usuario addUsuario(@RequestBody Usuario usuario) {
+        return usuariosService.addUsuario(usuario);
+    }
+
+    @PostMapping("/registro")
+    public Usuario registrarUsuario(@RequestBody Usuario usuario) {
+        return usuariosService.addUsuario(usuario);
+    }
+
+    @DeleteMapping(path="{usuarioId}")
+    public Usuario deleteUsuario(@PathVariable("usuarioId") Long id) {
+        return usuariosService.deletUsuario(id);
+    }
+
+    @PutMapping(path="{usuarioId}")
+    public Usuario updateUsuario(@PathVariable("usuarioId") Long id,
+                                 @RequestBody ChangePassword changePassword) {
+        return usuariosService.updateUsuario(id, changePassword);
+    }
+}

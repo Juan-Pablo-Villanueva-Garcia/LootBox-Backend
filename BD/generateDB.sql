@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `LootBox`.`pedido` (
   `precioTotal` DECIMAL(6,2) NOT NULL,
   `status` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`idPedido`),
-  INDEX `fk_Pedido_Usuario_idx` (`idUsuario_fk` ASC) VISIBLE,
+  INDEX `fk_Pedido_Usuario_idx` (`idUsuario_fk` ASC),
   CONSTRAINT `fk_Pedido_Usuario`
     FOREIGN KEY (`idUsuario_fk`)
     REFERENCES `LootBox`.`usuario` (`idUsuario`)
@@ -58,12 +58,12 @@ CREATE TABLE IF NOT EXISTS `LootBox`.`productos` (
   `descripcion` VARCHAR(255) NOT NULL,
   `category` INT(1) ZEROFILL NOT NULL,
   `price` DECIMAL(6,2) NOT NULL,
-  `rating` JSON NOT NULL,
+  `rating` TEXT NOT NULL,
   `sku` INT NOT NULL,
   `stock` INT(4) UNSIGNED ZEROFILL NOT NULL,
   `costo` DECIMAL(6,2) NOT NULL,
   PRIMARY KEY (`idProductos`),
-  UNIQUE INDEX `sku_UNIQUE` (`sku` ASC) VISIBLE)
+  UNIQUE INDEX `sku_UNIQUE` (`sku` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
@@ -75,8 +75,8 @@ CREATE TABLE IF NOT EXISTS `LootBox`.`pedido_has_productos` (
   `Pedido_idPedido` INT NOT NULL,
   `Productos_idProductos` INT NOT NULL,
   PRIMARY KEY (`Pedido_idPedido`, `Productos_idProductos`),
-  INDEX `fk_Pedido_has_Productos_Productos1_idx` (`Productos_idProductos` ASC) VISIBLE,
-  INDEX `fk_Pedido_has_Productos_Pedido1_idx` (`Pedido_idPedido` ASC) VISIBLE,
+  INDEX `fk_Pedido_has_Productos_Productos1_idx` (`Productos_idProductos` ASC),
+  INDEX `fk_Pedido_has_Productos_Pedido1_idx` (`Pedido_idPedido` ASC),
   CONSTRAINT `fk_Pedido_has_Productos_Pedido1`
     FOREIGN KEY (`Pedido_idPedido`)
     REFERENCES `LootBox`.`pedido` (`idPedido`),
