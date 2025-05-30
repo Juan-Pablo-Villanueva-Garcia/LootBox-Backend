@@ -35,8 +35,8 @@ public class Producto {
 //	private static Long total = Long.valueOf(0);
 //	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
 //	private Set<PedidoshasProduct> pedidos_has_product = new HashSet<>();
-	@ManyToMany(mappedBy = "productos")
-    private Set<Pedido> pedidos = new HashSet<>();
+//	@ManyToMany(mappedBy = "productos")
+//    private Set<Pedido> pedidos = new HashSet<>();
 	
 	public Producto () {
 	} //Constructor vacio
@@ -126,18 +126,18 @@ public class Producto {
 		return id;
 	}//getIdProductos
 	
-	public Set<Pedido> getPedidos() {
-		return pedidos;
-	}
-	public void setPedidos(Set<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
+//	public Set<Pedido> getPedidos() {
+//		return pedidos;
+//	}
+//	public void setPedidos(Set<Pedido> pedidos) {
+//		this.pedidos = pedidos;
+//	}
 
 	@Override
 	public String toString() {
 		return "Producto [id=" + id + ", name=" + name + ", imagen=" + imagen + ", descripcion=" + descripcion
 				+ ", category=" + category + ", price=" + price + ", JSON=" + JSON + ", sku=" + sku + ", stock=" + stock
-				+ ", costo=" + costo + ", categoriaid=" + categoriaid + ", pedidos=" + pedidos + "]";
+				+ ", costo=" + costo + ", categoriaid=" + categoriaid + "]";
 	}
 
 	

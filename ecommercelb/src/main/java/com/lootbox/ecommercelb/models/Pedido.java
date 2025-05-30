@@ -1,10 +1,10 @@
 package com.lootbox.ecommercelb.models;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Base64;
 //import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -38,7 +38,7 @@ public class Pedido {
         joinColumns = @JoinColumn(name = "pedido_fk"), // Columna para la clave foránea de Order
         inverseJoinColumns = @JoinColumn(name = "producto_fk") // Columna para la clave foránea de Product
     )
-    private Set<Producto> productos = new HashSet<>();
+    private List<Producto> productos = new ArrayList<Producto>(); 
 	
 	
 	public Pedido() {
@@ -77,8 +77,13 @@ public class Pedido {
 		return precioTotal;
 	}
 
-	public Set<Producto> getProductos() {
+	public List<Producto> getProductos() {
 		return productos;
+	}
+
+	public void setProducto(Producto producto) {
+		//this.productos = productos;
+		this.productos.add(producto);
 	}
 
 	public Long getUsuarioid() {

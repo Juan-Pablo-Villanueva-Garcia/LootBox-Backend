@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lootbox.ecommercelb.dto.SolicitudPedidoDTO;
 import com.lootbox.ecommercelb.models.Pedido;
 import com.lootbox.ecommercelb.services.PedidosService;
 
@@ -45,8 +46,8 @@ public class PedidosController {
 	}
 	
 	@PostMapping
-	public Pedido createPedido(@RequestBody Pedido pedido) {
-		return pedidosService.createPedido(pedido);
+	public Pedido createPedido(@RequestBody SolicitudPedidoDTO solicitudPedidoDTO) {
+		return pedidosService.createPedido(solicitudPedidoDTO);
 	}//createPedido()
 	
 	@PutMapping(path="{numeroPedido}")
