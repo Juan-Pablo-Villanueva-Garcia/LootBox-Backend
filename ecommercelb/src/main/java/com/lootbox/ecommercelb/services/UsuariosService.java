@@ -37,12 +37,11 @@ public class UsuariosService {
 	public List<Usuario> getUsuarios() {
 		return usuarioRepository.findAll();
 	}//getUsuarios
-	public Usuario getUsuario(Long id) {
-		Usuario tmp = null;
-		if(usuarioRepository.existsById(id)) {
-			tmp = usuarioRepository.findById(id).get();
-		}//if	
-	return tmp;
+	public Usuario getUsuario(String correoUsuario) {
+		Optional<Usuario> consultaUsuario = usuarioRepository.findByEmail(correoUsuario);
+		if(consultaUsuario.isEmpty())
+			return null;
+		return consultaUsuario.get();
 	}//getUsuario
 	public Usuario addUsuario(Usuario usuario) {
 		 Optional<Usuario> user = usuarioRepository.findByEmail(usuario.getEmail());

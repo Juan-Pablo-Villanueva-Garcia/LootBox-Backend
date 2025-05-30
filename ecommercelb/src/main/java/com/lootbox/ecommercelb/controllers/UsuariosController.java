@@ -36,9 +36,9 @@ public class UsuariosController {
         return usuariosService.getUsuarios();
     }
 
-    @GetMapping(path="{usuarioId}")
-    public Usuario getUsuario(@PathVariable("usuarioId") Long id) {
-        return usuariosService.getUsuario(id);
+    @GetMapping(path="{correoUsuario}")
+    public Usuario getUsuario(@PathVariable("correoUsuario") String correoUsuario) {
+        return usuariosService.getUsuario(correoUsuario);
     }
 
     @PostMapping

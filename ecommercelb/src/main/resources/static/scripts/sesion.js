@@ -42,12 +42,58 @@ btnEnviar.addEventListener("click", function (event) {
     }
 
     // Verificación de usuario
-    const usuarios = JSON.parse(localStorage.getItem('users')) || [];
-    const usuarioEncontrado = usuarios.find(usuario =>
-        usuario.email.toLowerCase() === correo.toLowerCase() &&
-        usuario.password === password
-    );
 
+    //const usuarios = JSON.parse(localStorage.getItem('users')) || [];
+    // const usuarioEncontrado = usuarios.find(usuario =>
+    //      === correo.toLowerCase() &&
+    //      === password
+    // );
+   
+
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({
+        "email": `${correo}`,
+        "password": `${password}`
+    });
+
+    const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow"
+    };
+
+    fetch("/api/login/", requestOptions)
+        .then((response) => response.json())
+        .then((result) => {
+            sessionStorage.setItem("Authorization",`Bearer: ${result.accesToken}`);
+
+            const headerUsuario = new Headers();
+            headerUsuario.append("Authorization", sessionStorage.getItem("Authorization"));
+
+            const requestOptions = {
+                method: "GET",
+                headers: headerUsuario,
+                redirect: "follow"
+            };
+
+            fetch(`/api/usuarios/${correo}`, requestOptions)
+            .then((response) => response.json())
+            .then((usuario) => {
+                console.log(usuario);
+                sessionStorage.setItem("usuario",JSON.stringify(usuario));
+                usuarioValidado();
+            })
+            .catch((error) => console.error(error));
+        })
+        .catch((error) => console.error(error));
+});
+
+
+function usuarioValidado(){
+    const usuarioEncontrado = JSON.parse(sessionStorage.getItem("usuario"))||null;
     if (usuarioEncontrado) {
         Swal.fire("Bienvenido", `Hola ${usuarioEncontrado.nombre}`, "success").then(()=>{
             sessionStorage.setItem("usuarioActivo", JSON.stringify(usuarioEncontrado));  
@@ -74,4 +120,4 @@ btnEnviar.addEventListener("click", function (event) {
         }
         
     }
-});
+}
