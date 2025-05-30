@@ -45,23 +45,27 @@ public class ProductsService {
 	}//deleteProduct
 
 	public Producto updateProduct(Long id, String name, String imagen, String descripcion, String category, Double price, String jSON, Integer sku, Integer stock, Double costo, Long categoriaid) {
-		Producto tmp = null;
-		if(productsRepository.existsById(id)) {
-			if (productsRepository.existsById(id)) {
-				Producto producto = productsRepository.findById(id).get();
-				if (name!= null) producto.setName(name);
-				if (imagen!= null) producto.setImagen(imagen);
-				if (descripcion!= null) producto.setDescripcion(descripcion);
-				if (category!= null) producto.setCategory(category);
-				if (price!= null) producto.setPrice(price);
-				if (jSON!= null) producto.setJSON(jSON);
-				if (sku!= null) producto.setSku(sku);
-				if (stock!= null) producto.setStock(stock);
-				if (costo!= null) producto.setCosto(costo);
-				if (categoriaid!= null) producto.setCategoriaid(categoriaid);
-				tmp = producto;
-			}//if
-		}//for
-		return tmp;
+		
+		Optional<Producto> consultaProducto = productsRepository.findById(id);
+		
+		//Producto tmp = null;
+		if(consultaProducto.isEmpty())
+			return null;
+		Producto producto = consultaProducto.get();
+		
+		if (name!= null) producto.setName(name);
+		if (imagen!= null) producto.setImagen(imagen);
+		if (descripcion!= null) producto.setDescripcion(descripcion);
+		if (category!= null) producto.setCategory(category);
+		if (price!= null) producto.setPrice(price);
+		if (jSON!= null) producto.setJSON(jSON);
+		if (sku!= null) producto.setSku(sku);
+		if (stock!= null) producto.setStock(stock);
+		if (costo!= null) producto.setCosto(costo);
+		if (categoriaid!= null) producto.setCategoriaid(categoriaid);
+		
+		productsRepository.save(producto);
+		
+		return producto;
 	}//updateProduct
 }//class ProductsService
