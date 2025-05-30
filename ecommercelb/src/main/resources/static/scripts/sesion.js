@@ -41,37 +41,66 @@ btnEnviar.addEventListener("click", function (event) {
         return;
     }
 
-    // Verificación de usuario
-    const usuarios = JSON.parse(localStorage.getItem('users')) || [];
-    const usuarioEncontrado = usuarios.find(usuario =>
-        usuario.email.toLowerCase() === correo.toLowerCase() &&
-        usuario.password === password
-    );
+   
+       const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
 
-    if (usuarioEncontrado) {
-        Swal.fire("Bienvenido", `Hola ${usuarioEncontrado.nombre}`, "success").then(()=>{
-            sessionStorage.setItem("usuarioActivo", JSON.stringify(usuarioEncontrado));  
-            window.location.href = "./index.html";
-            
+        const raw = JSON.stringify({
+        "email": correo,
+        "password": password
         });
-    } else {
-        const correoExiste = usuarios.some(usuario => usuario.email.toLowerCase() === correo.toLowerCase());
 
-        if(correoExiste){
-            Swal.fire("Error", "Correo o contraseña incorrectos. Por favor, intenta nuevamente.", "error");
-        } else {
-            Swal.fire({
-                title: "Correo no registrado",
-                text: "Este correo no está registrado. ¿Deseas crear una cuenta?",
-                showCancelButton: true,
-                confirmButtonText: "Ir al registro",
-                cancelButtonText: "Cancelar"
-            }).then((result)=> {
-                if(result.isConfirmed) {
-                    window.location.href ="./registro.html"
+        const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow"
+        };
+
+        fetch("/api/login/", requestOptions)
+            .then((response) => {
+                if (!response.ok) {
+                // Si el login falló (por ejemplo, 401 Unauthorized)
+                throw new Error("Credenciales incorrectas");
                 }
-            })  
-        }
-        
-    }
+                return response.json();
+            })
+            .then((result) => {
+                const { accesToken } = result;
+                sessionStorage.setItem("token", accesToken);
+                buscarusuarios(accesToken, raw);
+            })
+            .catch((error) => {
+                Swal.fire("Error", "Correo o contraseña incorrectos. Por favor, intenta nuevamente.", "error");
+            });
+    
 });
+
+//buscarUsuarios
+        function buscarusuarios(token,raw){
+        const {email} = JSON.parse(raw)
+        console.log(email);
+        
+        const myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer "+token);
+
+                const requestOptions = {
+                method: "GET",
+                headers: myHeaders,
+                redirect: "follow"
+                };
+
+                fetch("/api/usuarios/", requestOptions)
+                .then((response) => response.json())
+                .then(result =>{
+            result.forEach(user => {
+                if(user.email === email){      
+             Swal.fire("Bienvenido", `Hola ${user.nombre}`, "success").then(()=>{
+             sessionStorage.setItem("usuarioActivo", JSON.stringify(user));  
+             window.location.href = "./index.html";
+          });
+         }  
+            });
+        })
+        .catch(err=>console.log(err))
+    }

@@ -11,6 +11,7 @@ const urlImage = document.getElementById("url-imagen");
 const btnPublicar = document.getElementById("btn-publicar");
 const selectorCategoria = document.getElementById("selector-categoria");
 const session = sessionStorage.getItem('usuarioActivo');
+const token = sessionStorage.getItem('token');
 //-Cargar Imagenes
 const fileImageContainer = document.getElementById("fileImageContainer");
 const imageOutput = document.getElementById("output");
@@ -24,6 +25,7 @@ const cuerpoTabla = tablaItems.getElementsByTagName("tbody").item(0);
 
 let listaProductos = [];
 let imageCoded;
+let categorias = [];
 if (window.location.pathname === '/publicar.html') {
    const user = JSON.parse(session);
     if (user.isAdmin === false) {
@@ -31,11 +33,55 @@ if (window.location.pathname === '/publicar.html') {
   }
 }
 
+//mostrar productos
+async function init() {
+  await getCategorias();  // Esperar a que las categorías se carguen
+  tenerITems();           // Después de tener categorías, ahora carga productos
+}
+
+init();
+function tenerITems(){
+//myHeaders.append("Authorization", "Bearer "+token);
+const requestOptions = {
+  method: "GET",
+  redirect: "follow"
+};
+
+fetch("/api/prod/", requestOptions)
+  .then((response) =>  response.json())
+  .then((result) => {
+        
+    listaProductos = result
+
+    mostrarDatosLocal();
+  }
+)
+  .catch((error) => console.error(error));
+}
+
+//traer Categorias
+function getCategorias(){
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow"
+  };
+
+  return fetch("api/categorias/", requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      categorias = result;
+    })
+    .catch((error) => {
+      console.error("Error cargando categorías:", error);
+    });
+}//getCategoria
+
 function mostrarDatosLocal(){
-  listaProductos = JSON.parse(localStorage.getItem('productos')) || [];
+  // listaProductos = JSON.parse(localStorage.getItem('productos')) || [];
   cuerpoTabla.innerHTML = "";
   listaProductos.forEach(addRow);
 }
+
 
 function limpiarAlertasYEstilos() {
   // Elimina clases de error
@@ -133,7 +179,7 @@ btnPublicar.addEventListener("click", function (event) {
     id: Date.now(), // Añadir un ID único al producto
     sku: sku.value.trim(),
     name: producto.value.trim(),
-    img: imageCoded,
+    imagen: imageCoded,
     description: descripcion.value,
     price: Number(precio.value),
     cost: Number(costo.value),
@@ -197,7 +243,7 @@ function editComp(event) {
 
               <div class="mb-3">
                 <label for="descripcionEditar" class="form-label">Descripción</label>
-                <input type="text" class="form-control" id="descripcionEditar" value="${producto.description}">
+                <input type="text" class="form-control" id="descripcionEditar" value="${producto.descripcion}">
               </div>
 
               <div class="mb-3">
@@ -222,11 +268,12 @@ function editComp(event) {
               <div class="mb-3">
                 <label for="categoriaEditar" class="form-label">Categoría</label>
                 <select class="form-select" id="categoriaEditar">
-                  <option disabled hidden ${!producto.category ? 'selected' : ''}>Selecciona la categoría</option>
-                  <option value="Consolas" ${producto.category === "Consolas" ? 'selected' : ''}>Consolas</option>
-                  <option value="Merch" ${producto.category === "Merch" ? 'selected' : ''}>Merch</option>
-                  <option value="Periféricos" ${producto.category === "Periféricos" ? 'selected' : ''}>Periféricos</option>
-                  <option value="Videojuegos" ${producto.category === "Videojuegos" ? 'selected' : ''}>Videojuegos</option>
+                  <option disabled hidden ${!producto.categoriaid ? 'selected' : ''}>Selecciona la categoría</option>
+                  <option value="Consolas" ${producto.categoriaid === 1 ? 'selected' : ''}>Consolas</option>
+                  <option value="Lootbox" ${producto.categoriaid === 2 ? 'selected' : ''}>Lootbox</option>
+                  <option value="Merch" ${producto.categoriaid === 3 ? 'selected' : ''}>Merch</option>
+                  <option value="Periféricos" ${producto.categoriaid === 4 ? 'selected' : ''}>Periféricos</option>
+                  <option value="Videojuegos" ${producto.categoriaid === 5 ? 'selected' : ''}>Videojuegos</option>
                 </select>
               </div>
             </div>
@@ -244,6 +291,8 @@ function editComp(event) {
     const fileInputEditar = document.getElementById("fileUploadEditar");
       const spinnerEditar = document.getElementById("spinnerEditar");
         let imageCodedEditar; // Variable para la imagen del modal
+        console.log(imageCoded,"imaen");
+        
           
           fileInputEditar.addEventListener("change", async () => {
             imageCodedEditar = null;       spinnerEditar.classList.remove("visually-hidden");
@@ -308,7 +357,7 @@ function editComp(event) {
      // Validar la imagen SOLO si se ha seleccionado un nuevo archivo
      if (fileInputEditar.files.length > 0) {
          // Aquí podrías agregar validaciones más específicas para el tipo o tamaño del archivo si lo deseas
-     } else if (!listaProductos[document.getElementById("indexEditar").value].img) {
+     } else if (!listaProductos[document.getElementById("indexEditar").value].imagen) {
          // Si no se seleccionó una nueva imagen Y el producto original no tenía imagen
          mostrarError(document.getElementById('fileImageContainerEditar'), 'fileUploadEditar-alert-container', 'La imagen del producto es necesaria.');
          hayErrores = true;
@@ -323,8 +372,8 @@ function editComp(event) {
       id: listaProductos[idx].id, // Mantener el ID original
       name: productoEditar.value.trim(),
       sku: skuEditar.value.trim(),
-      description: descripcionEditar.value.trim(),
-      img: imageCodedEditar !== undefined ? imageCodedEditar : listaProductos[idx].img,
+      descripcion: descripcionEditar.value.trim(),
+      imagen: imageCodedEditar !== undefined ? imageCodedEditar : listaProductos[idx].img,
       price: Number(precioEditar.value),
       stock: Number(canditadEditar.value),
       category: categoriaEditar.value,
@@ -356,15 +405,22 @@ function editComp(event) {
 
 
 function addRow(element){
+  let category  = "";
+  categorias.forEach(cat => {
+
+    if(cat.id === Number(element.categoriaid)){
+      category = cat.nombre;
+    }
+  });
   cuerpoTabla.insertAdjacentHTML("beforeend",`
     <tr>
-      <td data-label=""><img src="${element.img}" alt="${element.name}" style="max-width: 4rem; max-height: 4rem;"></td>
+      <td data-label=""><img src="${element.imagen}" alt="${element.name}" style="max-width: 4rem; max-height: 4rem;"></td>
       <td data-label="SKU">${element.sku}</td>
       <td data-label="Producto">
         <div class="label-mobile" hidden>Producto:</div>
         <div class="value-mobile">${element.name}</div>
       </td>
-      <td data-label="Categoría">${element.category || 'Sin Categoría'}</td>
+      <td data-label="Categoría">${category || 'Sin Categoría'}</td>
       <td data-label="Precio">${element.price}</td>
       <td data-label="Cantidad">${element.stock}</td>
       <td data-label="Acciones">
