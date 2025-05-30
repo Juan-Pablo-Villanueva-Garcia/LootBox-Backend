@@ -38,7 +38,7 @@ public class JwtFilter extends GenericFilterBean {
 			    
 		if (requiereToken) {
 			String authHeader = httpServletRequest.getHeader("Authorization");
-			if (authHeader == null || !authHeader.startsWith("Bearer: ")) {
+			if (authHeader == null || !authHeader.startsWith("Bearer ")) {
 				System.out.println("1. Invalid Token");
 				throw new ServletException("1. Invalid Token");
 			}//Validar que se recibió un dato.
