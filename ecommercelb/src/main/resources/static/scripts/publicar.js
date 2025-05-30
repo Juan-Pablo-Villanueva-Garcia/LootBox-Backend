@@ -176,20 +176,42 @@ btnPublicar.addEventListener("click", function (event) {
   if (!valido) return;
 
   const nuevoProducto = {
-    id: Date.now(), // Añadir un ID único al producto
+    // id: Date.now(), // Añadir un ID único al producto
     sku: sku.value.trim(),
     name: producto.value.trim(),
     imagen: imageCoded,
-    description: descripcion.value,
+    descripcion: descripcion.value,
     price: Number(precio.value),
-    cost: Number(costo.value),
+    costo: Number(costo.value),
     stock: Number(cantidad.value),
     category: selectorCategoria.value,
-    rating: {
+    categoriaid: Number(selectorCategoria.value),
+    jSON: {
       rate: parseFloat((Math.random() * 5).toFixed(1)),
       count: Math.floor(Math.random() * 1001)
     }
   };
+  console.log(nuevoProducto);
+  
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", "Bearer "+token);
+  myHeaders.append("Content-Type", "application/json");
+
+const raw = JSON.stringify(nuevoProducto);
+console.log(raw,"aqui");
+
+
+const requestOptions = {
+  method: "POST",
+  headers: myHeaders,
+  body: raw,
+  redirect: "follow"
+};
+
+fetch("/api/prod/", requestOptions)
+  .then((response) => response.text())
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error));
 
   addRow(nuevoProducto);
   listaProductos.push(nuevoProducto);
@@ -213,7 +235,7 @@ function editComp(event) {
   const index = listaProductos.findIndex(prod => prod.name === nombreProducto);
   const producto = listaProductos[index];
 
-
+  console.log(producto)
   // Borra modal existente
   const modalExistente = document.getElementById("modalEditar");
   if (modalExistente) modalExistente.remove();
@@ -367,7 +389,7 @@ function editComp(event) {
     
 
     const idx = document.getElementById("indexEditar").value;
-
+     
     listaProductos[idx] = {
       id: listaProductos[idx].id, // Mantener el ID original
       name: productoEditar.value.trim(),

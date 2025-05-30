@@ -31,6 +31,8 @@ function insertarCategorias(prod){
 
 //Carga las tarjetas en el main a partir de un objeto tipo prods
 function createCards(prods) {
+  console.log(prods);
+  
   const calif = JSON.parse(prods.json.replace("\\",""));
   main.insertAdjacentHTML(
     "beforeend",
