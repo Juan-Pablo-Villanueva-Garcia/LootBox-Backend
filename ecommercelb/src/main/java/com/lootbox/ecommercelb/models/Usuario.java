@@ -1,5 +1,6 @@
 package com.lootbox.ecommercelb.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -8,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,9 +33,12 @@ public class Usuario {
 	@Column(nullable = false)
 	private Boolean isAdmin = false;
 	
-	@OneToMany(mappedBy = "usuario" , cascade = CascadeType.ALL, orphanRemoval = true) //Clave foranea de usuario en pedidos
-	private List<Pedido> pedidos;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "usuarioid", referencedColumnName= "id")
+	private List<Pedido> pedidos = new ArrayList<Pedido>();
 	
+	
+
 	public Usuario(String nombre, String email, String telefono, String password, String direccion) {
 		this.nombre = nombre;
 		this.email = email;
@@ -92,12 +97,17 @@ public class Usuario {
 	public Long getId() {
 		return id;
 	}//getidUsuario
+	
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
 
 	@Override
 	public String toString() {
-		return "Usuarios [id=" + id + ", nombre=" + nombre + ", email=" + email + ", telefono=" + telefono
-				+ ", password=" + password + ", direccion=" + direccion + ", isAdmin=" + isAdmin + "]";
-	}//toString
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", email=" + email + ", telefono=" + telefono
+				+ ", password=" + password + ", direccion=" + direccion + ", isAdmin=" + isAdmin + ", pedidos="
+				+ pedidos + "]";
+	}
 			
 }//class Usuarios
 

@@ -46,7 +46,7 @@ public class UsuariosController {
         return usuariosService.addUsuario(usuario);
     }
 
-    @PostMapping("/registro")
+    @PostMapping("registro")
     public Usuario registrarUsuario(@RequestBody Usuario usuario) {
         return usuariosService.addUsuario(usuario);
     }

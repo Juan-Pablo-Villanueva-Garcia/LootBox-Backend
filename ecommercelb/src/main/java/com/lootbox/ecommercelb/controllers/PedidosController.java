@@ -34,14 +34,14 @@ public class PedidosController {
 		return pedidosService.getPedidos();
 	}
 	
-	@GetMapping(path="{pedidoID}")
-	public Pedido getPedido(@PathVariable("pedidoID") Long id) {
-		return pedidosService.getPedido(id);
+	@GetMapping(path="{numeroPedido}")
+	public Pedido getPedido(@PathVariable("numeroPedido") String numeroPedido) {
+		return pedidosService.getPedido(numeroPedido);
 	}
 	
-	@DeleteMapping(path="{pedidoID}")
-	public Pedido deletePedido(@PathVariable("pedidoID") Long id) {
-		return pedidosService.deletePedido(id);
+	@DeleteMapping(path="{numeroPedido}")
+	public Pedido deletePedido(@PathVariable("numeroPedido") String numeroPedido) {
+		return pedidosService.deletePedido(numeroPedido);
 	}
 	
 	@PostMapping
@@ -49,12 +49,12 @@ public class PedidosController {
 		return pedidosService.createPedido(pedido);
 	}//createPedido()
 	
-	@PutMapping(path="{pedidoID}")
+	@PutMapping(path="{numeroPedido}")
 	public Pedido updatePedido(
-			@PathVariable("pedidoID") Long id,  
+			@PathVariable("numeroPedido") String numeroPedido,  
 			@RequestParam(required = true) String status
 			){
-		return pedidosService.updatePedido(id,status);
+		return pedidosService.updatePedido(numeroPedido,status);
 	}//updatePedido()
 	
 }//Class PedidosController

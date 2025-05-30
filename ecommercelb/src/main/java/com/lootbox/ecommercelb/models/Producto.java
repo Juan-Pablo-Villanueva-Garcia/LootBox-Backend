@@ -2,14 +2,12 @@ package com.lootbox.ecommercelb.models;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -35,9 +33,13 @@ public class Producto {
 	@Column(nullable=false)
 	private Long categoriaid;
 //	private static Long total = Long.valueOf(0);
-	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<PedidoshasProduct> pedidos_has_product = new HashSet<>();
+//	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+//	private Set<PedidoshasProduct> pedidos_has_product = new HashSet<>();
+	@ManyToMany(mappedBy = "productos")
+    private Set<Pedido> pedidos = new HashSet<>();
 	
+	public Producto () {
+	} //Constructor vacio
 	
 	public Producto(String name, String imagen, String descripcion, String category, Double price, String jSON,
 			Integer sku, Integer stock, Double costo, Long categoriaid) {
@@ -47,7 +49,7 @@ public class Producto {
 		this.descripcion = descripcion;
 		this.category = category;
 		this.price = price;
-		JSON = jSON;
+		this.JSON = jSON;
 		this.sku = sku;
 		this.stock = stock;
 		this.costo = costo;
@@ -58,8 +60,7 @@ public class Producto {
 	
 
 	//Getters and Setters
-	public Producto () {
-	} //Constructor vacio
+	
 
 	public Long getCategoriaid() {
 		return categoriaid;
@@ -125,11 +126,20 @@ public class Producto {
 		return id;
 	}//getIdProductos
 	
+	public Set<Pedido> getPedidos() {
+		return pedidos;
+	}
+	public void setPedidos(Set<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
 	@Override
 	public String toString() {
-		return "Products [id=" + id + ", name=" + name + ", imagen=" + imagen + ", descripcion="
-				+ descripcion + ", category=" + category + ", price=" + price + ", JSON=" + JSON + ", sku=" + sku
-				+ ", stock=" + stock + ", costo=" + costo + ", categoriaid=" +  categoriaid +"]";
-	}//toString
+		return "Producto [id=" + id + ", name=" + name + ", imagen=" + imagen + ", descripcion=" + descripcion
+				+ ", category=" + category + ", price=" + price + ", JSON=" + JSON + ", sku=" + sku + ", stock=" + stock
+				+ ", costo=" + costo + ", categoriaid=" + categoriaid + ", pedidos=" + pedidos + "]";
+	}
+
+	
 	
 }//class Products
